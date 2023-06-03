@@ -1,0 +1,29 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+
+  "[python]": {
+    "editor.defaultFormatter": null
+  },
+  "python.formatting.provider": "black",
+
+  "[css][scss]": {
+    "editor.formatOnSave": false,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": true,
+      "source.fixAll.format": true
+    }
+  },
+  "css.validate": false,
+  "scss.validate": false,
+  "stylelint.validate": ["css", "scss"],
+
+  "[javascript][typescript][javascriptreact][typescriptreact][jsx][tsx]": {
+    "editor.formatOnSave": false,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true,
+      "source.fixAll.format": true
+    }
+  },
+  "typescript.tsdk": "node_modules/typescript/lib"
+}
