@@ -1,24 +1,21 @@
-import { FC, MouseEventHandler, useContext } from 'react';
+import { FC } from 'react';
 
-import {
-  AppContext,
-  AppUpdateContext,
-} from './providers/App/AppContextProvider';
-import { updateCount } from './providers/App/appReducer';
 import './styles/index.scss';
+import Container from './components/Container/Container';
+import SVGChart from './components/SVGChart/SVGChart';
+import useChartSize from './hooks/useChartSize';
+import useData from './hooks/useData';
 
 const App: FC = () => {
-  const { count } = useContext(AppContext);
-  const dispatch = useContext(AppUpdateContext);
+  const { chartParentRef, chartSize } = useChartSize();
 
-  const handleIncrement: MouseEventHandler<HTMLButtonElement> = () => {
-    dispatch(updateCount(count + 1));
-  };
+  useData();
 
   return (
     <div>
-      <p>Count: {count}</p>
-      <button onClick={handleIncrement}>+</button>
+      <Container ref={chartParentRef}>
+        <SVGChart {...chartSize}></SVGChart>
+      </Container>
     </div>
   );
 };
