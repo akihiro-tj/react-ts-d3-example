@@ -1,0 +1,14 @@
+.grid-y {
+  text {
+    @apply hidden;
+  }
+
+  :global(.domain) {
+    @apply hidden;
+  }
+
+  :global(.tick) line {
+    stroke: #ccc;
+    stroke-dasharray: 2 2;
+  }
+}
