@@ -1,15 +1,15 @@
-import { axisLeft } from 'd3-axis';
+import { axisBottom } from 'd3-axis';
 import { ScaleLinear } from 'd3-scale';
 import { select } from 'd3-selection';
 import { FC, useEffect, useRef } from 'react';
 
-type AxisLeft = {
+type AxisBottom = {
   className?: string;
-  x: number;
+  y: number;
   scale: ScaleLinear<number, number, never>;
 };
 
-const AxisLeft: FC<AxisLeft> = ({ className, x, scale }) => {
+const AxisBottom: FC<AxisBottom> = ({ className, y, scale }) => {
   const ref = useRef<SVGGElement>(null);
 
   useEffect(() => {
@@ -17,12 +17,12 @@ const AxisLeft: FC<AxisLeft> = ({ className, x, scale }) => {
 
     const element = select(ref.current);
 
-    axisLeft(scale)(element);
+    axisBottom(scale)(element);
   }, [scale]);
 
   return (
-    <g ref={ref} className={className} transform={`translate(${x}, 0)`}></g>
+    <g ref={ref} className={className} transform={`translate(0, ${y})`}></g>
   );
 };
 
-export default AxisLeft;
+export default AxisBottom;

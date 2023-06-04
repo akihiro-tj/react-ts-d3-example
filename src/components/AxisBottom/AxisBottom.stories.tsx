@@ -7,7 +7,7 @@ import useChartSize from '../../hooks/useChartSize';
 import Container from '../Container/Container';
 import SVGChart from '../SVGChart/SVGChart';
 
-import AxisLeft from './AxisLeft';
+import AxisBottom from './AxisBottom';
 
 type Story = StoryObj<typeof Mock>;
 
@@ -27,14 +27,14 @@ const Mock: StoryFn<MockArgs> = ({ data, margin }) => {
   const scale = useMemo(() => {
     return scaleLinear()
       .domain(extent(data) as [number, number])
-      .range([chartSize.height - margin.bottom, margin.top])
+      .range([margin.left, chartSize.width - margin.right])
       .nice();
   }, [data, chartSize, margin]);
 
   return (
     <Container ref={chartParentRef}>
       <SVGChart {...chartSize}>
-        <AxisLeft x={margin.left} scale={scale} />
+        <AxisBottom y={chartSize.height - margin.bottom} scale={scale} />
       </SVGChart>
     </Container>
   );
@@ -53,7 +53,7 @@ export const Default: Story = {
 };
 
 const meta: Meta<typeof Mock> = {
-  title: 'AxisLeft',
+  title: 'AxisBottom',
   component: Mock,
 };
 export default meta;
