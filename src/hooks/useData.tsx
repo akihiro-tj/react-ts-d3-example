@@ -1,7 +1,8 @@
 import { extent } from 'd3-array';
 import { scaleLinear } from 'd3-scale';
-import { useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 
+import { AppContext } from '../providers/App/AppContextProvider';
 import { Datum } from '../types';
 
 import useCSV from './useCSV';
@@ -18,9 +19,13 @@ type Margin = {
   left: number;
 };
 
-const useData = (size: Size, margin: Margin) => {
-  const [data, setData] = useState<Datum[]>();
+const minYear = 1543;
+const maxYear = 2018;
 
+const useData = (size: Size, margin: Margin) => {
+  const [data, setData] = useState<Datum[]>([]);
+
+  const { year } = useContext(AppContext);
   const csv = useCSV('/data.csv');
 
   useEffect(() => {
@@ -38,8 +43,6 @@ const useData = (size: Size, margin: Margin) => {
   }, [csv]);
 
   const scale = useMemo(() => {
-    if (!data) return;
-
     const x = scaleLinear()
       .domain(extent(data, d => d.gdp) as [number, number])
       .range([margin.left, size.width - margin.right])
@@ -53,7 +56,23 @@ const useData = (size: Size, margin: Margin) => {
     return { x, y };
   }, [data, size, margin]);
 
-  return { scale };
+  const years = useMemo(() => {
+    return Array.from(new Set(data.map(d => d.year)))
+      .filter(year => minYear <= year && year <= maxYear)
+      .sort((a, b) => a - b);
+  }, [data]);
+
+  const plots = useMemo(() => {
+    return data
+      .filter(d => d.year === year && !isNaN(d.gdp) && !isNaN(d.life))
+      .map(d => ({
+        label: d.country,
+        x: scale.x(d.gdp),
+        y: scale.y(d.life),
+      }));
+  }, [data, year, scale]);
+
+  return { years, scale, plots };
 };
 
 export default useData;

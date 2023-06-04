@@ -1,31 +1,31 @@
 import { Action } from '../../types';
 
 export type AppState = {
-  count: number;
+  year: number;
 };
 
 export const initialAppState: AppState = {
-  count: 0,
+  year: 2018,
 };
 
 // Action types
-const UPDATE_COUNT = 'UPDATE_COUNT';
+const UPDATE_YEAR = 'UPDATE_YEAR';
 
 // Actions
-export const updateCount = (count: number) => {
+export const updateYear = (year: number) => {
   return {
-    type: UPDATE_COUNT,
-    payload: count,
+    type: UPDATE_YEAR,
+    payload: year,
   };
 };
 
 // Reducer
 export const appReducer = (state: AppState, action: Action): AppState => {
   switch (action.type) {
-    case UPDATE_COUNT: {
+    case UPDATE_YEAR: {
       return {
         ...state,
-        count: action.payload,
+        year: action.payload,
       };
     }
 
