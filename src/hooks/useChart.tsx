@@ -1,13 +1,8 @@
 import { extent } from 'd3-array';
 import { scaleLinear } from 'd3-scale';
-import { useContext, useMemo } from 'react';
+import { useContext, useEffect, useMemo, useRef, useState } from 'react';
 
 import { AppContext } from '../providers/App/AppContextProvider';
-
-type Size = {
-  width: number;
-  height: number;
-};
 
 type Margin = {
   top: number;
@@ -16,11 +11,19 @@ type Margin = {
   left: number;
 };
 
-const minYear = 1543;
-const maxYear = 2018;
-
-const useChartData = (size: Size, margin: Margin) => {
+const useChart = (margin: Margin, aspect: number) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [size, setSize] = useState({ width: 0, height: 0 });
   const { data, year } = useContext(AppContext);
+
+  useEffect(() => {
+    if (!ref.current) return;
+
+    const width = ref.current.clientWidth;
+    const height = width * aspect;
+
+    setSize({ width, height });
+  }, [aspect]);
 
   const scale = useMemo(() => {
     const x = scaleLinear()
@@ -36,12 +39,6 @@ const useChartData = (size: Size, margin: Margin) => {
     return { x, y };
   }, [data, size, margin]);
 
-  const years = useMemo(() => {
-    return Array.from(new Set(data.map(d => d.year)))
-      .filter(year => minYear <= year && year <= maxYear)
-      .sort((a, b) => a - b);
-  }, [data]);
-
   const plots = useMemo(() => {
     return data
       .filter(d => d.year === year && !isNaN(d.gdp) && !isNaN(d.life))
@@ -52,7 +49,7 @@ const useChartData = (size: Size, margin: Margin) => {
       }));
   }, [data, year, scale]);
 
-  return { years, scale, plots };
+  return { ref, size, scale, plots };
 };
 
-export default useChartData;
+export default useChart;

@@ -1,7 +1,6 @@
 import { FC } from 'react';
 
-import useChartData from '../../hooks/useChartData';
-import useChartSize from '../../hooks/useChartSize';
+import useChart from '../../hooks/useChart';
 import AxisBottom from '../AxisBottom/AxisBottom';
 import AxisLeft from '../AxisLeft/AxisLeft';
 import Container from '../Container/Container';
@@ -14,36 +13,34 @@ type Chart = {
   className?: string;
 };
 
-const chartMargin = {
+const margin = {
   top: 20,
   right: 60,
   bottom: 50,
   left: 50,
 };
 
+const aspect = 3 / 4;
+
 const Chart: FC<Chart> = ({ className }) => {
-  const { chartParentRef, chartSize } = useChartSize();
-  const { scale, plots } = useChartData(chartSize, chartMargin);
+  const { ref, size, scale, plots } = useChart(margin, aspect);
 
   return (
     <div className={className}>
-      <Container ref={chartParentRef}>
-        <SVGChart {...chartSize}>
+      <Container ref={ref}>
+        <SVGChart {...size}>
           <GridX
-            minX={chartMargin.left}
-            maxX={chartSize.width - chartMargin.right}
+            minX={margin.left}
+            maxX={size.width - margin.right}
             scale={scale.y}
           />
           <GridY
-            minY={chartMargin.top}
-            maxY={chartSize.height - chartMargin.bottom}
+            minY={margin.top}
+            maxY={size.height - margin.bottom}
             scale={scale.x}
           />
-          <AxisLeft x={chartMargin.left} scale={scale.y} />
-          <AxisBottom
-            y={chartSize.height - chartMargin.bottom}
-            scale={scale.x}
-          />
+          <AxisLeft x={margin.left} scale={scale.y} />
+          <AxisBottom y={size.height - margin.bottom} scale={scale.x} />
           {plots.map(plot => (
             <Plot key={plot.label} {...plot} />
           ))}

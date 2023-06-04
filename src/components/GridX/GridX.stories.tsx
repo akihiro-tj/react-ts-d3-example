@@ -3,7 +3,7 @@ import { extent } from 'd3-array';
 import { scaleLinear } from 'd3-scale';
 import { useMemo } from 'react';
 
-import useChartSize from '../../hooks/useChartSize';
+import useChart from '../../hooks/useChart';
 import Container from '../Container/Container';
 import SVGChart from '../SVGChart/SVGChart';
 
@@ -19,24 +19,25 @@ type MockArgs = {
     bottom: number;
     left: number;
   };
+  aspect: number;
 };
 
-const Mock: StoryFn<MockArgs> = ({ data, margin }) => {
-  const { chartParentRef, chartSize } = useChartSize();
+const Mock: StoryFn<MockArgs> = ({ data, margin, aspect }) => {
+  const { ref, size } = useChart(margin, aspect);
 
   const scale = useMemo(() => {
     return scaleLinear()
       .domain(extent(data) as [number, number])
-      .range([chartSize.height - margin.bottom, margin.top])
+      .range([size.height - margin.bottom, margin.top])
       .nice();
-  }, [data, chartSize, margin]);
+  }, [data, size, margin]);
 
   return (
-    <Container ref={chartParentRef}>
-      <SVGChart {...chartSize}>
+    <Container ref={ref}>
+      <SVGChart {...size}>
         <GridX
           minX={margin.left}
-          maxX={chartSize.width - margin.right}
+          maxX={size.width - margin.right}
           scale={scale}
         />
       </SVGChart>
@@ -53,6 +54,7 @@ export const Default: Story = {
       bottom: 50,
       left: 50,
     },
+    aspect: 3 / 4,
   },
 };
 
