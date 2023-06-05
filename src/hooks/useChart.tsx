@@ -13,6 +13,7 @@ type Margin = {
   left: number;
 };
 
+const minRadius = 2;
 const maxRadius = 20;
 
 const useChart = (margin: Margin, aspect: number) => {
@@ -41,7 +42,7 @@ const useChart = (margin: Margin, aspect: number) => {
 
     const area = scaleLinear()
       .domain([0, max(data, d => d.population) as number])
-      .range([0, calcArea(maxRadius)]);
+      .range([calcArea(minRadius), calcArea(maxRadius)]);
 
     const radius = (value: number) => calcRadius(area(value));
 
