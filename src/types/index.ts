@@ -5,6 +5,7 @@ export type Action = {
 
 export type Datum = {
   country: string;
+  continent: string;
   year: number;
   life: number;
   gdp: number;

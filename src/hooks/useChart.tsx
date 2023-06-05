@@ -1,5 +1,6 @@
 import { extent, max } from 'd3-array';
-import { scaleLinear, scaleLog } from 'd3-scale';
+import { scaleLinear, scaleLog, scaleOrdinal } from 'd3-scale';
+import { schemeCategory10 } from 'd3-scale-chromatic';
 import { useContext, useEffect, useMemo, useRef, useState } from 'react';
 
 import { AppContext } from '../providers/App/AppContextProvider';
@@ -47,6 +48,19 @@ const useChart = (margin: Margin, aspect: number) => {
     return { x, y, radius };
   }, [data, size, margin]);
 
+  const colors = useMemo(() => {
+    const colorScale = scaleOrdinal(schemeCategory10);
+    const continents = Array.from(new Set(data.map(d => d.continent)));
+
+    return continents.reduce(
+      (acc, cur, index) => ({
+        ...acc,
+        [cur]: colorScale(index.toString()),
+      }),
+      {} as { [key: string]: string },
+    );
+  }, [data]);
+
   const plots = useMemo(() => {
     return data
       .filter(d => d.year === year)
@@ -55,8 +69,9 @@ const useChart = (margin: Margin, aspect: number) => {
         x: scale.x(d.gdp),
         y: scale.y(d.life),
         radius: scale.radius(d.population),
+        color: colors[d.continent],
       }));
-  }, [data, year, scale]);
+  }, [data, year, scale, colors]);
 
   return { ref, size, scale, plots };
 };

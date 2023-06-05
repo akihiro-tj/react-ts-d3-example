@@ -6,11 +6,30 @@ type Plot = {
   x: number;
   y: number;
   radius: number;
+  color?: string;
+  fillOpacity?: number;
 };
 
-const Plot: FC<Plot> = ({ className, label, x, y, radius }) => {
+const Plot: FC<Plot> = ({
+  className,
+  label,
+  x,
+  y,
+  radius,
+  color = '#888',
+  fillOpacity = 0.7,
+}) => {
   return (
-    <circle className={className} data-label={label} cx={x} cy={y} r={radius} />
+    <circle
+      className={className}
+      data-label={label}
+      cx={x}
+      cy={y}
+      r={radius}
+      fill={color}
+      fillOpacity={fillOpacity}
+      stroke={color}
+    />
   );
 };
 

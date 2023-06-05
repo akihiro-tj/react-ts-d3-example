@@ -19,8 +19,10 @@ const useData = () => {
     if (!csv) return;
 
     const data: Datum[] = csv
+      .filter(row => Object.keys(countries).includes(row.Entity))
       .map(row => ({
         country: row.Entity,
+        continent: countries[row.Entity].continent,
         year: parseFloat(row.Year),
         life: parseFloat(row['Life expectancy at birth (historical)']),
         gdp: parseFloat(row['GDP per capita']),
@@ -28,7 +30,6 @@ const useData = () => {
       }))
       .filter(
         d =>
-          countries.includes(d.country) &&
           minYear <= d.year &&
           d.year <= maxYear &&
           !isNaN(d.life) &&
