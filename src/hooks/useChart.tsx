@@ -49,7 +49,7 @@ const useChart = (margin: Margin, aspect: number) => {
 
   const plots = useMemo(() => {
     return data
-      .filter(d => d.year === year && !isNaN(d.gdp) && !isNaN(d.life))
+      .filter(d => d.year === year)
       .map(d => ({
         label: d.country,
         x: scale.x(d.gdp),

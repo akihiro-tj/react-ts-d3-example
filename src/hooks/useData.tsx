@@ -7,6 +7,9 @@ import { Datum } from '../types';
 
 import useCSV from './useCSV';
 
+const minYear = 1543;
+const maxYear = 2018;
+
 const useData = () => {
   const dispatch = useContext(AppUpdateContext);
 
@@ -23,7 +26,15 @@ const useData = () => {
         gdp: parseFloat(row['GDP per capita']),
         population: parseFloat(row['Population (historical estimates)']),
       }))
-      .filter(d => countries.includes(d.country));
+      .filter(
+        d =>
+          countries.includes(d.country) &&
+          minYear <= d.year &&
+          d.year <= maxYear &&
+          !isNaN(d.life) &&
+          !isNaN(d.gdp) &&
+          !isNaN(d.population),
+      );
 
     dispatch(updateData(data));
   }, [csv, dispatch]);
