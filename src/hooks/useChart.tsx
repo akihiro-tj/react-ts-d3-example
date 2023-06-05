@@ -3,7 +3,7 @@ import { scaleLinear, scaleLog, scaleOrdinal } from 'd3-scale';
 import { schemeCategory10 } from 'd3-scale-chromatic';
 import { useContext, useEffect, useMemo, useRef, useState } from 'react';
 
-import { AppContext } from '../providers/App/AppContextProvider';
+import { AppContext } from '../providers/app/AppContextProvider';
 import { calcArea, calcRadius } from '../util';
 
 type Margin = {

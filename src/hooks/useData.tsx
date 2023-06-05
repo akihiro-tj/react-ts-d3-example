@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react';
 
 import { countries } from '../constant';
-import { AppUpdateContext } from '../providers/App/AppContextProvider';
+import { AppUpdateContext } from '../providers/app/AppContextProvider';
 import { updateData } from '../providers/App/appReducer';
 import { Datum } from '../types';
 
