@@ -66,7 +66,7 @@ const useChart = (margin: Margin, aspect: number) => {
     return data
       .filter(d => d.year === year)
       .map(d => ({
-        label: d.country,
+        id: d.country,
         x: scale.x(d.gdp),
         y: scale.y(d.life),
         radius: scale.radius(d.population),
@@ -74,7 +74,19 @@ const useChart = (margin: Margin, aspect: number) => {
       }));
   }, [data, year, scale, colors]);
 
-  return { ref, size, scale, plots };
+  const labels = useMemo(() => {
+    return data
+      .filter(d => d.year === year && d.showLabel)
+      .map(d => ({
+        id: d.country,
+        x: scale.x(d.gdp),
+        y: scale.y(d.life) - scale.radius(d.population),
+        text: d.country,
+        color: colors[d.continent],
+      }));
+  }, [data, year, scale, colors]);
+
+  return { ref, size, scale, plots, labels };
 };
 
 export default useChart;

@@ -6,6 +6,7 @@ import AxisLeft from '../AxisLeft/AxisLeft';
 import Container from '../Container/Container';
 import GridX from '../GridX/GridX';
 import GridY from '../GridY/GridY';
+import Label from '../Label/Label';
 import Plot from '../Plot/Plot';
 import SVGChart from '../SVGChart/SVGChart';
 
@@ -23,7 +24,7 @@ const margin = {
 const aspect = 3 / 4;
 
 const Chart: FC<Chart> = ({ className }) => {
-  const { ref, size, scale, plots } = useChart(margin, aspect);
+  const { ref, size, scale, plots, labels } = useChart(margin, aspect);
 
   return (
     <div className={className}>
@@ -42,7 +43,10 @@ const Chart: FC<Chart> = ({ className }) => {
           <AxisLeft x={margin.left} scale={scale.y} />
           <AxisBottom y={size.height - margin.bottom} scale={scale.x} />
           {plots.map(plot => (
-            <Plot key={plot.label} {...plot} />
+            <Plot key={plot.id} {...plot} />
+          ))}
+          {labels.map(label => (
+            <Label key={label.id} {...label} />
           ))}
         </SVGChart>
       </Container>
