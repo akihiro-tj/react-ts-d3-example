@@ -23,6 +23,7 @@ const useData = () => {
       .map(row => ({
         country: row.Entity,
         continent: countries[row.Entity].continent,
+        showLabel: countries[row.Entity].showLabel,
         year: parseFloat(row.Year),
         life: parseFloat(row['Life expectancy at birth (historical)']),
         gdp: parseFloat(row['GDP per capita']),

@@ -1,4 +1,6 @@
-export const countries: { [key: string]: { continent: string } } = {
+import { Country } from './types';
+
+export const countries: Country = {
   Afghanistan: {
     continent: 'Asia',
   },
@@ -55,6 +57,7 @@ export const countries: { [key: string]: { continent: string } } = {
   },
   Brazil: {
     continent: 'South America',
+    showLabel: true,
   },
   Bulgaria: {
     continent: 'Europe',
@@ -88,6 +91,7 @@ export const countries: { [key: string]: { continent: string } } = {
   },
   China: {
     continent: 'Asia',
+    showLabel: true,
   },
   Colombia: {
     continent: 'South America',
@@ -202,6 +206,7 @@ export const countries: { [key: string]: { continent: string } } = {
   },
   India: {
     continent: 'Asia',
+    showLabel: true,
   },
   Indonesia: {
     continent: 'Asia',
@@ -226,6 +231,7 @@ export const countries: { [key: string]: { continent: string } } = {
   },
   Japan: {
     continent: 'Asia',
+    showLabel: true,
   },
   Jordan: {
     continent: 'Asia',
@@ -328,9 +334,11 @@ export const countries: { [key: string]: { continent: string } } = {
   },
   Nigeria: {
     continent: 'Africa',
+    showLabel: true,
   },
   'North Korea': {
     continent: 'Asia',
+    showLabel: true,
   },
   'North Macedonia': {
     continent: 'Europe',
@@ -376,6 +384,7 @@ export const countries: { [key: string]: { continent: string } } = {
   },
   Russia: {
     continent: 'Europe',
+    showLabel: true,
   },
   Rwanda: {
     continent: 'Africa',
@@ -412,6 +421,7 @@ export const countries: { [key: string]: { continent: string } } = {
   },
   'South Africa': {
     continent: 'Africa',
+    showLabel: true,
   },
   'South Korea': {
     continent: 'Asia',
@@ -427,6 +437,7 @@ export const countries: { [key: string]: { continent: string } } = {
   },
   Switzerland: {
     continent: 'Europe',
+    showLabel: true,
   },
   Syria: {
     continent: 'Asia',
@@ -472,6 +483,7 @@ export const countries: { [key: string]: { continent: string } } = {
   },
   'United States': {
     continent: 'North America',
+    showLabel: true,
   },
   Uruguay: {
     continent: 'South America',
