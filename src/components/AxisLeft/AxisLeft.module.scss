@@ -1,0 +1,10 @@
+.axis-left {
+  :global(.domain),
+  :global(.tick) line {
+    @apply invisible;
+  }
+
+  :global(.tick) text {
+    @apply text-xs;
+  }
+}
