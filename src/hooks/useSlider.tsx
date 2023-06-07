@@ -67,18 +67,29 @@ const useSlider = () => {
     [dispatch, years],
   );
 
+  const play = useCallback(
+    (firedByClick?: boolean) => {
+      const currYearIndex = years.indexOf(year);
+      const nextYearIndex = currYearIndex + 1;
+
+      if (nextYearIndex === years.length) {
+        if (firedByClick) {
+          dispatch(updateYear(years[0]));
+        } else {
+          dispatch(updateIsAutoPlaying(false));
+        }
+      } else {
+        dispatch(updateYear(years[nextYearIndex]));
+      }
+    },
+    [years, year, dispatch],
+  );
+
   const onPlayButtonClick: MouseEventHandler<HTMLButtonElement> =
     useCallback(() => {
+      play(true);
       dispatch(updateIsAutoPlaying(!isAutoPlaying));
-    }, [dispatch, isAutoPlaying]);
-
-  const play = useCallback(() => {
-    const currYearIndex = years.indexOf(year);
-    const nextYearIndex = currYearIndex + 1;
-    const targetIndex = nextYearIndex < years.length ? nextYearIndex : 0;
-
-    dispatch(updateYear(years[targetIndex]));
-  }, [years, year, dispatch]);
+    }, [dispatch, isAutoPlaying, play]);
 
   useEffect(() => {
     const intervalID = window.setInterval(() => {
