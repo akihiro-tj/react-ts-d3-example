@@ -19,5 +19,7 @@ module.exports = {
     'selector-class-pattern': null,
     'selector-pseudo-class-no-unknown': null,
     'block-no-empty': null,
+    'scss/at-rule-no-unknown': null,
+    'no-invalid-position-at-import-rule': null,
   },
 };

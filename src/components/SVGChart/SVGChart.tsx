@@ -10,7 +10,7 @@ type SVGChart = {
 
 const SVGChart: FC<SVGChart> = ({ className, children, width, height }) => {
   return (
-    <div className={clsx(className, 'relative w-full h-full')}>
+    <div className={clsx(className, 'relative h-full w-full')}>
       <svg
         style={{
           width: `${width}px`,

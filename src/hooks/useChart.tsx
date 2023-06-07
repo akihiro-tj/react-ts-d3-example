@@ -86,7 +86,18 @@ const useChart = (margin: Margin, aspect: number) => {
       }));
   }, [data, year, scale, colors]);
 
-  return { ref, size, scale, plots, labels };
+  const yearLabel = useMemo(() => {
+    const size = 32;
+    return {
+      x: margin.left + 16,
+      y: margin.top + size + 10,
+      text: year.toString(),
+      color: '#000',
+      size,
+    };
+  }, [year, margin]);
+
+  return { ref, size, scale, plots, labels, yearLabel };
 };
 
 export default useChart;

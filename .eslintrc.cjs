@@ -13,6 +13,7 @@ module.exports = {
     'plugin:jsx-a11y/recommended',
     'prettier',
     'plugin:storybook/recommended',
+    'plugin:tailwindcss/recommended',
   ],
   plugins: ['@typescript-eslint', 'import', 'prettier'],
   parser: '@typescript-eslint/parser',
