@@ -1,33 +1,3 @@
-# Vite-React-TypeScript Boilerplate
+# React x TypeScript x D3.js デモ
 
-## Setup
-
-```bash
-$ yarn
-```
-
-## Development
-
-```bash
-$ yarn dev
-```
-
-http://localhost:8000/
-
-## Build
-
-```bash
-$ yarn build
-```
-
-## Test
-
-```bash
-$ yarn test
-```
-
-## Lint
-
-```bash
-$ yarn fix
-```
+デモ: [リンク](https://akihiro-tj.github.io/react-ts-d3-example/)
