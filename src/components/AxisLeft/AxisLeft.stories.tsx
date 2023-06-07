@@ -20,9 +20,10 @@ type MockArgs = {
     left: number;
   };
   aspect: number;
+  label?: string;
 };
 
-const Mock: StoryFn<MockArgs> = ({ data, margin, aspect }) => {
+const Mock: StoryFn<MockArgs> = ({ data, margin, aspect, label }) => {
   const { ref, size } = useChart(margin, aspect);
 
   const scale = useMemo(() => {
@@ -35,7 +36,12 @@ const Mock: StoryFn<MockArgs> = ({ data, margin, aspect }) => {
   return (
     <Container ref={ref}>
       <SVGChart {...size}>
-        <AxisLeft x={margin.left} scale={scale} />
+        <AxisLeft
+          x={margin.left}
+          scale={scale}
+          label={label}
+          labelY={margin.top - 12}
+        />
       </SVGChart>
     </Container>
   );
@@ -45,12 +51,26 @@ export const Default: Story = {
   args: {
     data: [20, 40, 130, 55, 70],
     margin: {
-      top: 20,
+      top: 30,
       right: 60,
       bottom: 50,
       left: 50,
     },
     aspect: 3 / 4,
+  },
+};
+
+export const ShowLabel: Story = {
+  args: {
+    data: [20, 40, 130, 55, 70],
+    margin: {
+      top: 30,
+      right: 60,
+      bottom: 50,
+      left: 50,
+    },
+    aspect: 3 / 4,
+    label: 'hoge',
   },
 };
 
