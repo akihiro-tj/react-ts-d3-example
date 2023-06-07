@@ -7,7 +7,7 @@ import { Datum } from '../types';
 
 import useCSV from './useCSV';
 
-const minYear = 1543;
+const minYear = 1950;
 const maxYear = 2018;
 
 const useData = () => {

@@ -24,7 +24,10 @@ const margin = {
 const aspect = 3 / 4;
 
 const Chart: FC<Chart> = ({ className }) => {
-  const { ref, size, scale, plots, labels } = useChart(margin, aspect);
+  const { ref, size, scale, plots, labels, yearLabel } = useChart(
+    margin,
+    aspect,
+  );
 
   return (
     <div className={className}>
@@ -48,6 +51,7 @@ const Chart: FC<Chart> = ({ className }) => {
           {labels.map(label => (
             <Label key={label.id} {...label} />
           ))}
+          <Label {...yearLabel} />
         </SVGChart>
       </Container>
     </div>
