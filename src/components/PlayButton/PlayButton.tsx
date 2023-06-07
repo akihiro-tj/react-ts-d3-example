@@ -15,7 +15,7 @@ type PlayButton = {
 const PlayButton: FC<PlayButton> = ({ className, type, onClick }) => {
   return (
     <IconButton className={className} onClick={onClick}>
-      <Avatar src={`/img/${type}.svg`} />
+      <Avatar src={`img/${type}.svg`} />
     </IconButton>
   );
 };

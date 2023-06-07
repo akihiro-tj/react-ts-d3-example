@@ -13,7 +13,7 @@ const maxYear = 2018;
 const useData = () => {
   const dispatch = useContext(AppUpdateContext);
 
-  const csv = useCSV('/data.csv');
+  const csv = useCSV('data.csv');
 
   useEffect(() => {
     if (!csv) return;
