@@ -1,11 +1,15 @@
+import { continents, countries } from '../constant';
+
 export type Action = {
   type: string;
   payload: any;
 };
 
+export type Continent = typeof continents[number];
+
 export type Datum = {
-  country: string;
-  continent: string;
+  country: keyof typeof countries;
+  continent: Continent;
   showLabel?: boolean;
   year: number;
   life: number;
@@ -15,7 +19,11 @@ export type Datum = {
 
 export type Country = {
   [key: string]: {
-    continent: string;
+    continent: Continent;
     showLabel?: boolean;
   };
+};
+
+export type CheckBoxGroup = {
+  [key in Continent]: boolean;
 };

@@ -11,7 +11,7 @@ const Card: FC<Card> = ({ className, children }) => {
     <div
       className={clsx(
         className,
-        'relative mx-3 max-w-screen-sm shadow sm:mx-auto',
+        'relative mx-3 max-w-screen-md bg-white shadow md:mx-auto',
       )}
     >
       {children}

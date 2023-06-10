@@ -1,4 +1,34 @@
+import { scaleOrdinal } from 'd3-scale';
+import { schemeCategory10 } from 'd3-scale-chromatic';
+
 import { Country } from './types';
+
+export const continentNames = {
+  Asia: 'アジア',
+  Oceania: 'オセアニア',
+  Africa: 'アフリカ',
+  Europe: '欧州',
+  'North America': '北米',
+  'South America': '南米',
+} as const;
+
+export const continents = [
+  'Asia',
+  'Oceania',
+  'Africa',
+  'Europe',
+  'North America',
+  'South America',
+] as const;
+
+const colorScale = scaleOrdinal(schemeCategory10);
+export const colors = continents.reduce(
+  (acc, cur, index) => ({
+    ...acc,
+    [cur]: colorScale(index.toString()),
+  }),
+  {} as { [key: string]: string },
+);
 
 export const countries: Country = {
   Afghanistan: {
@@ -506,4 +536,4 @@ export const countries: Country = {
   Zimbabwe: {
     continent: 'Africa',
   },
-};
+} as const;

@@ -7,6 +7,7 @@ type Label = {
   text: string;
   size?: number;
   color?: string;
+  opacity?: number;
 };
 
 const Label: FC<Label> = ({
@@ -16,6 +17,7 @@ const Label: FC<Label> = ({
   text,
   size = 14,
   color = '#888',
+  opacity = 1,
 }) => {
   return (
     <g className={className}>
@@ -25,14 +27,23 @@ const Label: FC<Label> = ({
         fontSize={size}
         fontWeight="700"
         fill="#fff"
+        fillOpacity={opacity}
         stroke="#fff"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="0.25em"
+        strokeOpacity={opacity}
       >
         {text}
       </text>
-      <text x={x} y={y} fontSize={size} fontWeight="700" fill={color}>
+      <text
+        x={x}
+        y={y}
+        fontSize={size}
+        fontWeight="700"
+        fill={color}
+        fillOpacity={opacity}
+      >
         {text}
       </text>
     </g>

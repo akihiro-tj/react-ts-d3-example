@@ -41,6 +41,7 @@ const AxisBottom: FC<AxisBottom> = ({
     >
       {label && (
         <text
+          className="font-semibold"
           x={labelX}
           y={0}
           dy="3em"
