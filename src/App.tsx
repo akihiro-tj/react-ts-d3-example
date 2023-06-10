@@ -17,6 +17,7 @@ const App: FC = () => {
         <CheckBoxGroup className="mx-3 mb-6 max-w-screen-sm sm:mx-auto" />
         <Routes>
           <Route path="/chart" element={<Chart />} />
+          {/* <Route path="/country/:country" element={<Drawer />} /> TODO(#4) */}
           <Route path="/" element={<Navigate to="/chart" />} />
         </Routes>
         <Slider className="mx-auto hidden max-w-screen-sm pr-6 sm:flex" />
