@@ -30,7 +30,7 @@ const Chart: FC<Chart> = ({ className }) => {
   } = useChart();
 
   return (
-    <div className={clsx(className, 'mt-10 overflow-hidden py-1')}>
+    <div className={clsx(className, 'overflow-hidden py-1')}>
       <Card>
         <Container ref={ref}>
           <SVGChart {...size}>

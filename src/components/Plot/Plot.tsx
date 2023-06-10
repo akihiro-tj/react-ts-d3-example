@@ -6,6 +6,7 @@ type Plot = {
   y: number;
   radius: number;
   color?: string;
+  strokeOpacity?: number;
   fillOpacity?: number;
 };
 
@@ -15,6 +16,7 @@ const Plot: FC<Plot> = ({
   y,
   radius,
   color = '#888',
+  strokeOpacity = 1,
   fillOpacity = 0.7,
 }) => {
   return (
@@ -27,6 +29,7 @@ const Plot: FC<Plot> = ({
         fill={color}
         fillOpacity={fillOpacity}
         stroke={color}
+        strokeOpacity={strokeOpacity}
       />
     </g>
   );

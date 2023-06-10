@@ -40,7 +40,14 @@ const AxisLeft: FC<AxisLeft> = ({
       transform={`translate(${x}, 0)`}
     >
       {label && (
-        <text x={0} y={labelY} fill="#000" fontSize={14} textAnchor="start">
+        <text
+          className="font-semibold"
+          x={0}
+          y={labelY}
+          fill="#000"
+          fontSize={14}
+          textAnchor="start"
+        >
           {label}
         </text>
       )}

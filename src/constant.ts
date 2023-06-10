@@ -1,5 +1,36 @@
 import { Country } from './types';
 
+export const countryNames = {
+  'North Korea': '北朝鮮',
+  India: 'インド',
+  China: '中国',
+  Japan: '日本',
+  Brazil: 'ブラジル',
+  Russia: 'ロシア',
+  Switzerland: 'スイス',
+  'United States': '米国',
+  Nigeria: 'ナイジェリア',
+  'South Africa': '南アフリカ',
+} as const;
+
+export const continentNames = {
+  Asia: 'アジア',
+  Oceania: 'オセアニア',
+  Africa: 'アフリカ',
+  Europe: '欧州',
+  'North America': '北米',
+  'South America': '南米',
+} as const;
+
+export const continents = [
+  'Asia',
+  'Oceania',
+  'Africa',
+  'Europe',
+  'North America',
+  'South America',
+] as const;
+
 export const countries: Country = {
   Afghanistan: {
     continent: 'Asia',
@@ -57,7 +88,6 @@ export const countries: Country = {
   },
   Brazil: {
     continent: 'South America',
-    showLabel: true,
   },
   Bulgaria: {
     continent: 'Europe',
@@ -91,7 +121,6 @@ export const countries: Country = {
   },
   China: {
     continent: 'Asia',
-    showLabel: true,
   },
   Colombia: {
     continent: 'South America',
@@ -206,7 +235,6 @@ export const countries: Country = {
   },
   India: {
     continent: 'Asia',
-    showLabel: true,
   },
   Indonesia: {
     continent: 'Asia',
@@ -231,7 +259,6 @@ export const countries: Country = {
   },
   Japan: {
     continent: 'Asia',
-    showLabel: true,
   },
   Jordan: {
     continent: 'Asia',
@@ -334,11 +361,9 @@ export const countries: Country = {
   },
   Nigeria: {
     continent: 'Africa',
-    showLabel: true,
   },
   'North Korea': {
     continent: 'Asia',
-    showLabel: true,
   },
   'North Macedonia': {
     continent: 'Europe',
@@ -384,7 +409,6 @@ export const countries: Country = {
   },
   Russia: {
     continent: 'Europe',
-    showLabel: true,
   },
   Rwanda: {
     continent: 'Africa',
@@ -421,7 +445,6 @@ export const countries: Country = {
   },
   'South Africa': {
     continent: 'Africa',
-    showLabel: true,
   },
   'South Korea': {
     continent: 'Asia',
@@ -437,7 +460,6 @@ export const countries: Country = {
   },
   Switzerland: {
     continent: 'Europe',
-    showLabel: true,
   },
   Syria: {
     continent: 'Asia',
@@ -483,7 +505,6 @@ export const countries: Country = {
   },
   'United States': {
     continent: 'North America',
-    showLabel: true,
   },
   Uruguay: {
     continent: 'South America',
@@ -506,4 +527,4 @@ export const countries: Country = {
   Zimbabwe: {
     continent: 'Africa',
   },
-};
+} as const;

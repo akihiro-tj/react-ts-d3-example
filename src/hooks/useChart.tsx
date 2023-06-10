@@ -1,12 +1,13 @@
 import { extent, max } from 'd3-array';
 import { format } from 'd3-format';
-import { NumberValue, scaleLinear, scaleLog, scaleOrdinal } from 'd3-scale';
-import { schemeCategory10 } from 'd3-scale-chromatic';
+import { NumberValue, scaleLinear, scaleLog } from 'd3-scale';
 import { useCallback, useContext, useMemo, useRef, useState } from 'react';
 
+import { countryNames } from '../constant';
 import { AppContext } from '../providers/app/AppContextProvider';
 import { calcArea, calcRadius } from '../util';
 
+import useColors from './useColors';
 import useResize from './useResize';
 import useWindowSize from './useWindowSize';
 
@@ -32,7 +33,7 @@ const margins = {
 
 const aspects = {
   mobile: 5 / 4,
-  laptop: 3 / 4,
+  laptop: 3 / 5,
 };
 
 const xTickArrays = {
@@ -47,9 +48,11 @@ const yearLabelSizes = {
 
 const useChart = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const windowSize = useWindowSize();
   const [size, setSize] = useState({ width: 0, height: 0 });
-  const { data, year } = useContext(AppContext);
+  const { data, year, checkBoxGroup } = useContext(AppContext);
+
+  const windowSize = useWindowSize();
+  const colors = useColors();
 
   const device = useMemo(() => {
     return windowSize.width < breakPoint ? 'mobile' : 'laptop';
@@ -116,19 +119,6 @@ const useChart = () => {
     return { x, y, radius };
   }, [data, size, margin]);
 
-  const colors = useMemo(() => {
-    const colorScale = scaleOrdinal(schemeCategory10);
-    const continents = Array.from(new Set(data.map(d => d.continent)));
-
-    return continents.reduce(
-      (acc, cur, index) => ({
-        ...acc,
-        [cur]: colorScale(index.toString()),
-      }),
-      {} as { [key: string]: string },
-    );
-  }, [data]);
-
   const plots = useMemo(() => {
     return data
       .filter(d => d.year === year)
@@ -138,8 +128,10 @@ const useChart = () => {
         y: scale.y(d.life),
         radius: scale.radius(d.population),
         color: colors[d.continent],
+        strokeOpacity: checkBoxGroup[d.continent] ? 1 : 0.2,
+        fillOpacity: checkBoxGroup[d.continent] ? 0.7 : 0.1,
       }));
-  }, [data, year, scale, colors]);
+  }, [data, year, scale, colors, checkBoxGroup]);
 
   const labels = useMemo(() => {
     return data
@@ -148,10 +140,11 @@ const useChart = () => {
         id: d.country,
         x: scale.x(d.gdp),
         y: scale.y(d.life) - scale.radius(d.population),
-        text: d.country,
+        text: countryNames[d.country as keyof typeof countryNames],
         color: colors[d.continent],
+        opacity: checkBoxGroup[d.continent] ? 1 : 0.2,
       }));
-  }, [data, year, scale, colors]);
+  }, [data, year, scale, colors, checkBoxGroup]);
 
   const yearLabel = useMemo(() => {
     return {
