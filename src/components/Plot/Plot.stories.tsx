@@ -1,6 +1,7 @@
 import { Meta, StoryFn, StoryObj } from '@storybook/react';
 
 import useChart from '../../hooks/useChart';
+import Card from '../Card/Card';
 import Container from '../Container/Container';
 import Label from '../Label/Label';
 import SVGChart from '../SVGChart/SVGChart';
@@ -10,13 +11,6 @@ import Plot from './Plot';
 type Story = StoryObj<typeof Mock>;
 
 type MockArgs = {
-  margin: {
-    top: number;
-    right: number;
-    bottom: number;
-    left: number;
-  };
-  aspect: number;
   x: number;
   y: number;
   radius: number;
@@ -25,45 +19,31 @@ type MockArgs = {
   fontSize?: number;
 };
 
-const Mock: StoryFn<MockArgs> = ({
-  margin,
-  aspect,
-  x,
-  y,
-  radius,
-  color,
-  label,
-  fontSize,
-}) => {
-  const { ref, size } = useChart(margin, aspect);
+const Mock: StoryFn<MockArgs> = ({ x, y, radius, color, label, fontSize }) => {
+  const { ref, size } = useChart();
 
   return (
-    <Container ref={ref}>
-      <SVGChart {...size}>
-        <Plot x={x} y={y} radius={radius} color={color} />
-        {label && (
-          <Label
-            x={x}
-            y={y - radius}
-            text={label}
-            size={fontSize}
-            color={color}
-          />
-        )}
-      </SVGChart>
-    </Container>
+    <Card>
+      <Container ref={ref}>
+        <SVGChart {...size}>
+          <Plot x={x} y={y} radius={radius} color={color} />
+          {label && (
+            <Label
+              x={x}
+              y={y - radius}
+              text={label}
+              size={fontSize}
+              color={color}
+            />
+          )}
+        </SVGChart>
+      </Container>
+    </Card>
   );
 };
 
 export const Default: Story = {
   args: {
-    margin: {
-      top: 20,
-      right: 60,
-      bottom: 50,
-      left: 50,
-    },
-    aspect: 3 / 4,
     x: 50,
     y: 50,
     radius: 20,
@@ -73,13 +53,6 @@ export const Default: Story = {
 
 export const ShowLabel: Story = {
   args: {
-    margin: {
-      top: 20,
-      right: 60,
-      bottom: 50,
-      left: 50,
-    },
-    aspect: 3 / 4,
     x: 50,
     y: 50,
     radius: 20,

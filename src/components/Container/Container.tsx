@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import { ReactNode, forwardRef } from 'react';
 
 type Container = {
@@ -11,13 +10,7 @@ const Container = forwardRef<HTMLDivElement, Container>(function Container(
   ref,
 ) {
   return (
-    <div
-      ref={ref}
-      className={clsx(
-        className,
-        'relative mx-3 max-w-screen-sm shadow sm:mx-auto',
-      )}
-    >
+    <div ref={ref} className={className}>
       {children}
     </div>
   );
