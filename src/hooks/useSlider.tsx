@@ -20,7 +20,9 @@ const useSlider = () => {
   const dispatch = useContext(AppUpdateContext);
 
   const years = useMemo(() => {
-    return Array.from(new Set(data.map(d => d.year))).sort((a, b) => a - b);
+    return Array.from(new Set(data.map(d => d.year)))
+      .slice()
+      .sort((a, b) => a - b);
   }, [data]);
 
   const marks = useMemo(() => {

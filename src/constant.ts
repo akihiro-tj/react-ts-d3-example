@@ -1,3 +1,6 @@
+import { scaleOrdinal } from 'd3-scale';
+import { schemeCategory10 } from 'd3-scale-chromatic';
+
 import { Country } from './types';
 
 export const countryNames = {
@@ -30,6 +33,15 @@ export const continents = [
   'North America',
   'South America',
 ] as const;
+
+const colorScale = scaleOrdinal(schemeCategory10);
+export const colors = continents.reduce(
+  (acc, cur, index) => ({
+    ...acc,
+    [cur]: colorScale(index.toString()),
+  }),
+  {} as { [key: string]: string },
+);
 
 export const countries: Country = {
   Afghanistan: {

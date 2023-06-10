@@ -3,11 +3,10 @@ import { format } from 'd3-format';
 import { NumberValue, scaleLinear, scaleLog } from 'd3-scale';
 import { useCallback, useContext, useMemo, useRef, useState } from 'react';
 
-import { countryNames } from '../constant';
+import { colors, countryNames } from '../constant';
 import { AppContext } from '../providers/app/AppContextProvider';
 import { calcArea, calcRadius } from '../util';
 
-import useColors from './useColors';
 import useResize from './useResize';
 import useWindowSize from './useWindowSize';
 
@@ -52,7 +51,6 @@ const useChart = () => {
   const { data, year, checkBoxGroup } = useContext(AppContext);
 
   const windowSize = useWindowSize();
-  const colors = useColors();
 
   const device = useMemo(() => {
     return windowSize.width < breakPoint ? 'mobile' : 'laptop';
@@ -131,7 +129,7 @@ const useChart = () => {
         strokeOpacity: checkBoxGroup[d.continent] ? 1 : 0.2,
         fillOpacity: checkBoxGroup[d.continent] ? 0.7 : 0.1,
       }));
-  }, [data, year, scale, colors, checkBoxGroup]);
+  }, [data, year, scale, checkBoxGroup]);
 
   const labels = useMemo(() => {
     return data
@@ -144,7 +142,7 @@ const useChart = () => {
         color: colors[d.continent],
         opacity: checkBoxGroup[d.continent] ? 1 : 0.2,
       }));
-  }, [data, year, scale, colors, checkBoxGroup]);
+  }, [data, year, scale, checkBoxGroup]);
 
   const yearLabel = useMemo(() => {
     return {
