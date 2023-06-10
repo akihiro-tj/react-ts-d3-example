@@ -4,6 +4,7 @@ import { FC } from 'react';
 import useChart from '../../hooks/useChart';
 import AxisBottom from '../AxisBottom/AxisBottom';
 import AxisLeft from '../AxisLeft/AxisLeft';
+import Card from '../Card/Card';
 import Container from '../Container/Container';
 import GridX from '../GridX/GridX';
 import GridY from '../GridY/GridY';
@@ -30,41 +31,43 @@ const Chart: FC<Chart> = ({ className }) => {
 
   return (
     <div className={clsx(className, 'mt-10 overflow-hidden py-1')}>
-      <Container ref={ref}>
-        <SVGChart {...size}>
-          <GridX
-            minX={margin.left}
-            maxX={size.width - margin.right}
-            scale={scale.y}
-          />
-          <GridY
-            minY={margin.top}
-            maxY={size.height - margin.bottom}
-            scale={scale.x}
-          />
-          <AxisLeft
-            x={margin.left}
-            scale={scale.y}
-            tickFormat={yTickFormat}
-            label="平均寿命"
-            labelY={margin.top - 12}
-          />
-          <AxisBottom
-            y={size.height - margin.bottom}
-            scale={scale.x}
-            tickFormat={xTickFormat}
-            label="1人あたりGDP(対数スケール)"
-            labelX={size.width - margin.right}
-          />
-          {plots.map(plot => (
-            <Plot key={plot.id} {...plot} />
-          ))}
-          {labels.map(label => (
-            <Label key={label.id} {...label} />
-          ))}
-          <Label {...yearLabel} />
-        </SVGChart>
-      </Container>
+      <Card>
+        <Container ref={ref}>
+          <SVGChart {...size}>
+            <GridX
+              minX={margin.left}
+              maxX={size.width - margin.right}
+              scale={scale.y}
+            />
+            <GridY
+              minY={margin.top}
+              maxY={size.height - margin.bottom}
+              scale={scale.x}
+            />
+            <AxisLeft
+              x={margin.left}
+              scale={scale.y}
+              tickFormat={yTickFormat}
+              label="平均寿命"
+              labelY={margin.top - 12}
+            />
+            <AxisBottom
+              y={size.height - margin.bottom}
+              scale={scale.x}
+              tickFormat={xTickFormat}
+              label="1人あたりGDP(対数スケール)"
+              labelX={size.width - margin.right}
+            />
+            {plots.map(plot => (
+              <Plot key={plot.id} {...plot} />
+            ))}
+            {labels.map(label => (
+              <Label key={label.id} {...label} />
+            ))}
+            <Label {...yearLabel} />
+          </SVGChart>
+        </Container>
+      </Card>
     </div>
   );
 };

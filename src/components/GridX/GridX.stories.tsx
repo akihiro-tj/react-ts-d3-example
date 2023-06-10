@@ -4,6 +4,7 @@ import { scaleLinear } from 'd3-scale';
 import { useMemo } from 'react';
 
 import useChart from '../../hooks/useChart';
+import Card from '../Card/Card';
 import Container from '../Container/Container';
 import SVGChart from '../SVGChart/SVGChart';
 
@@ -13,17 +14,10 @@ type Story = StoryObj<typeof Mock>;
 
 type MockArgs = {
   data: number[];
-  margin: {
-    top: number;
-    right: number;
-    bottom: number;
-    left: number;
-  };
-  aspect: number;
 };
 
-const Mock: StoryFn<MockArgs> = ({ data, margin, aspect }) => {
-  const { ref, size } = useChart(margin, aspect);
+const Mock: StoryFn<MockArgs> = ({ data }) => {
+  const { ref, size, margin } = useChart();
 
   const scale = useMemo(() => {
     return scaleLinear()
@@ -33,28 +27,23 @@ const Mock: StoryFn<MockArgs> = ({ data, margin, aspect }) => {
   }, [data, size, margin]);
 
   return (
-    <Container ref={ref}>
-      <SVGChart {...size}>
-        <GridX
-          minX={margin.left}
-          maxX={size.width - margin.right}
-          scale={scale}
-        />
-      </SVGChart>
-    </Container>
+    <Card>
+      <Container ref={ref}>
+        <SVGChart {...size}>
+          <GridX
+            minX={margin.left}
+            maxX={size.width - margin.right}
+            scale={scale}
+          />
+        </SVGChart>
+      </Container>
+    </Card>
   );
 };
 
 export const Default: Story = {
   args: {
     data: [20, 40, 130, 55, 70],
-    margin: {
-      top: 20,
-      right: 60,
-      bottom: 50,
-      left: 50,
-    },
-    aspect: 3 / 4,
   },
 };
 
