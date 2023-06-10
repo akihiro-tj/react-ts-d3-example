@@ -1,8 +1,11 @@
 import { FormControl, Select as MUISelect, MenuItem } from '@mui/material';
+import clsx from 'clsx';
 import { FC } from 'react';
 
 import useSlider from '../../hooks/useSlider';
 import PlayButton from '../PlayButton/PlayButton';
+
+import style from './Select.module.scss';
 
 type Select = {
   className?: string;
@@ -15,7 +18,7 @@ const Select: FC<Select> = ({ className }) => {
   } = useSlider();
 
   return (
-    <div className={className}>
+    <div className={clsx(className, style.select)}>
       <PlayButton {...playButtonProps} />
       <FormControl fullWidth>
         <MUISelect value={value} onChange={onChange}>

@@ -1,0 +1,5 @@
+.play-button {
+  :global(.MuiAvatar-img) {
+    @apply w-10 h-10 object-contain;
+  }
+}

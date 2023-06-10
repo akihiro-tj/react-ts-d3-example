@@ -1,6 +1,4 @@
 import clsx from 'clsx';
-import { format } from 'd3-format';
-import { NumberValue } from 'd3-scale';
 import { FC } from 'react';
 
 import useChart from '../../hooks/useChart';
@@ -17,30 +15,18 @@ type Chart = {
   className?: string;
 };
 
-const margin = {
-  top: 30,
-  right: 60,
-  bottom: 50,
-  left: 50,
-};
-
-const aspect = 3 / 4;
-
-const xTicks = [1000, 2000, 5000, 10000, 20000, 50000, 100000];
-const xTickFormat = (value: NumberValue) => {
-  return xTicks.includes(value.valueOf()) ? format('$,.0f')(value) : '';
-};
-
-const yTickFormat: any = (value: NumberValue, index: number, ticks: any[]) => {
-  const age = value.valueOf();
-  return index === ticks.length - 1 ? `${age}歳` : age;
-};
-
 const Chart: FC<Chart> = ({ className }) => {
-  const { ref, size, scale, plots, labels, yearLabel } = useChart(
+  const {
+    ref,
     margin,
-    aspect,
-  );
+    xTickFormat,
+    yTickFormat,
+    size,
+    scale,
+    plots,
+    labels,
+    yearLabel,
+  } = useChart();
 
   return (
     <div className={clsx(className, 'mt-10 overflow-hidden py-1')}>

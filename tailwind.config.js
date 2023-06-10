@@ -3,6 +3,9 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {},
+    screens: {
+      sm: '600px',
+    },
   },
   plugins: [],
 };

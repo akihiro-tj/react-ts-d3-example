@@ -1,5 +1,8 @@
 import { Avatar, IconButton } from '@mui/material';
+import clsx from 'clsx';
 import { FC, MouseEventHandler } from 'react';
+
+import style from './PlayButton.module.scss';
 
 export const playButtonTypes = {
   play: 'play',
@@ -14,7 +17,7 @@ type PlayButton = {
 
 const PlayButton: FC<PlayButton> = ({ className, type, onClick }) => {
   return (
-    <IconButton className={className} onClick={onClick}>
+    <IconButton className={clsx(className, style.playButton)} onClick={onClick}>
       <Avatar src={`img/${type}.svg`} />
     </IconButton>
   );

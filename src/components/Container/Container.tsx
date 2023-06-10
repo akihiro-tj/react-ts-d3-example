@@ -13,7 +13,10 @@ const Container = forwardRef<HTMLDivElement, Container>(function Container(
   return (
     <div
       ref={ref}
-      className={clsx(className, 'relative mx-auto max-w-screen-sm p-4 shadow')}
+      className={clsx(
+        className,
+        'relative mx-3 max-w-screen-sm shadow sm:mx-auto',
+      )}
     >
       {children}
     </div>
