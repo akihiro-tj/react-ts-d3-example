@@ -3,7 +3,7 @@ import { format } from 'd3-format';
 import { NumberValue, scaleLinear, scaleLog } from 'd3-scale';
 import { useCallback, useContext, useMemo, useRef, useState } from 'react';
 
-import { colors, countryNames } from '../constant';
+import { colors } from '../constant';
 import { AppContext } from '../providers/app/AppContextProvider';
 import { calcArea, calcRadius } from '../util';
 
@@ -138,7 +138,7 @@ const useChart = () => {
         id: d.country,
         x: scale.x(d.gdp),
         y: scale.y(d.life) - scale.radius(d.population),
-        text: countryNames[d.country as keyof typeof countryNames],
+        text: d.country,
         color: colors[d.continent],
         opacity: checkBoxGroup[d.continent] ? 1 : 0.2,
       }));
