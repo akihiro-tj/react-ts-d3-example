@@ -1,4 +1,4 @@
-import { continents, countries } from '../constant';
+import { continents } from '../constant';
 
 export type Action = {
   type: string;
@@ -8,7 +8,7 @@ export type Action = {
 export type Continent = typeof continents[number];
 
 export type Datum = {
-  country: keyof typeof countries;
+  country: string;
   continent: Continent;
   showLabel?: boolean;
   year: number;
