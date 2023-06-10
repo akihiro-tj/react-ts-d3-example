@@ -12,7 +12,7 @@ type CheckBoxGroup = {
 };
 
 const CheckBoxGroup: FC<CheckBoxGroup> = ({ className }) => {
-  const { items, handleCheckBoxClick } = useCheckBoxGroup();
+  const { items, onClick } = useCheckBoxGroup();
 
   return (
     <div className={className}>
@@ -30,7 +30,7 @@ const CheckBoxGroup: FC<CheckBoxGroup> = ({ className }) => {
                 checked={item.checked}
                 data-id={item.id}
                 data-checked={item.checked || null}
-                onClick={handleCheckBoxClick}
+                onClick={onClick}
               />
             }
           />

@@ -29,7 +29,7 @@ export const useCheckBoxGroup = () => {
       });
   }, [checkBoxGroup]);
 
-  const handleCheckBoxClick: MouseEventHandler<HTMLButtonElement> = useCallback(
+  const onClick: MouseEventHandler<HTMLButtonElement> = useCallback(
     e => {
       const id = e.currentTarget.getAttribute('data-id') as Continent;
       const checked = e.currentTarget.getAttribute('data-checked') !== null;
@@ -38,5 +38,5 @@ export const useCheckBoxGroup = () => {
     [dispatch],
   );
 
-  return { items, handleCheckBoxClick };
+  return { items, onClick };
 };
