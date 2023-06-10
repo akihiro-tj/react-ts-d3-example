@@ -1,4 +1,4 @@
-import { SelectChangeEvent } from '@mui/material';
+import { SelectChangeEvent } from '@mui/material/Select';
 import {
   MouseEventHandler,
   ReactNode,
@@ -8,7 +8,6 @@ import {
   useMemo,
 } from 'react';
 
-import { playButtonTypes } from '../components/PlayButton/PlayButton';
 import {
   AppContext,
   AppUpdateContext,
@@ -116,7 +115,7 @@ const useSlider = () => {
       onChange: onSelectChange,
     },
     playButtonProps: {
-      type: isAutoPlaying ? playButtonTypes.pause : playButtonTypes.play,
+      isPlaying: isAutoPlaying,
       onClick: onPlayButtonClick,
     },
   };

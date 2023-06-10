@@ -19,8 +19,8 @@ const App: FC = () => {
           <Route path="/chart" element={<Chart />} />
           <Route path="/" element={<Navigate to="/chart" />} />
         </Routes>
-        <Slider className="mx-auto hidden max-w-screen-sm items-center justify-between gap-4 py-4 pr-6 sm:flex" />
-        <Select className="mx-auto flex w-48 items-center justify-between gap-2 py-4 sm:hidden" />
+        <Slider className="mx-auto hidden max-w-screen-sm pr-6 sm:flex" />
+        <Select className="mx-auto flex sm:hidden" />
       </div>
     </HashRouter>
   );
