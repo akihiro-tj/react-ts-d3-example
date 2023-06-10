@@ -9,7 +9,6 @@ import Container from '../Container/Container';
 import GridX from '../GridX/GridX';
 import GridY from '../GridY/GridY';
 import Label from '../Label/Label';
-import Legend from '../Legend/Legend';
 import Plot from '../Plot/Plot';
 import SVGChart from '../SVGChart/SVGChart';
 
@@ -33,7 +32,6 @@ const Chart: FC<Chart> = ({ className }) => {
   return (
     <div className={clsx(className, 'mt-10 overflow-hidden py-1')}>
       <Card>
-        <Legend />
         <Container ref={ref}>
           <SVGChart {...size}>
             <GridX
