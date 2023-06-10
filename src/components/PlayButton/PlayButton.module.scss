@@ -1,5 +1,9 @@
 .play-button {
-  :global(.MuiAvatar-img) {
-    @apply w-10 h-10 object-contain;
+  :global(.MuiSvgIcon-root) {
+    @apply w-full h-full;
+  }
+
+  :global(.MuiSvgIcon-root) path {
+    fill: #334155;
   }
 }
