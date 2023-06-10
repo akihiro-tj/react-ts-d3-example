@@ -1,27 +1,92 @@
 import { extent, max } from 'd3-array';
-import { scaleLinear, scaleLog, scaleOrdinal } from 'd3-scale';
+import { format } from 'd3-format';
+import { NumberValue, scaleLinear, scaleLog, scaleOrdinal } from 'd3-scale';
 import { schemeCategory10 } from 'd3-scale-chromatic';
-import { useContext, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useContext, useMemo, useRef, useState } from 'react';
 
 import { AppContext } from '../providers/app/AppContextProvider';
 import { calcArea, calcRadius } from '../util';
 
-type Margin = {
-  top: number;
-  right: number;
-  bottom: number;
-  left: number;
-};
+import useResize from './useResize';
+import useWindowSize from './useWindowSize';
 
 const minRadius = 2;
 const maxRadius = 20;
 
-const useChart = (margin: Margin, aspect: number) => {
+const breakPoint = 600;
+
+const margins = {
+  mobile: {
+    top: 40,
+    right: 60,
+    bottom: 60,
+    left: 50,
+  },
+  laptop: {
+    top: 50,
+    right: 35,
+    bottom: 65,
+    left: 60,
+  },
+};
+
+const aspects = {
+  mobile: 5 / 4,
+  laptop: 3 / 4,
+};
+
+const xTickArrays = {
+  mobile: [1000, 5000, 20000, 100000],
+  laptop: [1000, 2000, 5000, 10000, 20000, 50000, 100000],
+};
+
+const yearLabelSizes = {
+  mobile: 24,
+  laptop: 32,
+};
+
+const useChart = () => {
   const ref = useRef<HTMLDivElement>(null);
+  const windowSize = useWindowSize();
   const [size, setSize] = useState({ width: 0, height: 0 });
   const { data, year } = useContext(AppContext);
 
-  useEffect(() => {
+  const device = useMemo(() => {
+    return windowSize.width < breakPoint ? 'mobile' : 'laptop';
+  }, [windowSize]);
+
+  const margin = useMemo(() => {
+    return margins[device];
+  }, [device]);
+
+  const aspect = useMemo(() => {
+    return aspects[device];
+  }, [device]);
+
+  const xTickArray = useMemo(() => {
+    return xTickArrays[device];
+  }, [device]);
+
+  const yearLabelSize = useMemo(() => {
+    return yearLabelSizes[device];
+  }, [device]);
+
+  const xTickFormat = useCallback(
+    (value: NumberValue) => {
+      return xTickArray.includes(value.valueOf()) ? format('$,.0f')(value) : '';
+    },
+    [xTickArray],
+  );
+
+  const yTickFormat: any = useCallback(
+    (value: NumberValue, index: number, ticks: any[]) => {
+      const age = value.valueOf();
+      return index === ticks.length - 1 ? `${age}歳` : age;
+    },
+    [],
+  );
+
+  const updateSize = useCallback(() => {
     if (!ref.current) return;
 
     const width = ref.current.clientWidth;
@@ -29,6 +94,8 @@ const useChart = (margin: Margin, aspect: number) => {
 
     setSize({ width, height });
   }, [aspect]);
+
+  useResize(updateSize);
 
   const scale = useMemo(() => {
     const x = scaleLog()
@@ -87,17 +154,26 @@ const useChart = (margin: Margin, aspect: number) => {
   }, [data, year, scale, colors]);
 
   const yearLabel = useMemo(() => {
-    const size = 32;
     return {
-      x: margin.left + 16,
-      y: margin.top + size + 10,
+      x: margin.left + yearLabelSize * 0.5,
+      y: margin.top + yearLabelSize + yearLabelSize * 0.3125,
       text: year.toString(),
       color: '#000',
-      size,
+      size: yearLabelSize,
     };
-  }, [year, margin]);
+  }, [year, margin, yearLabelSize]);
 
-  return { ref, size, scale, plots, labels, yearLabel };
+  return {
+    ref,
+    margin,
+    xTickFormat,
+    yTickFormat,
+    size,
+    scale,
+    plots,
+    labels,
+    yearLabel,
+  };
 };
 
 export default useChart;

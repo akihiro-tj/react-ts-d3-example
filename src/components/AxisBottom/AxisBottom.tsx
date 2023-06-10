@@ -43,7 +43,7 @@ const AxisBottom: FC<AxisBottom> = ({
         <text
           x={labelX}
           y={0}
-          dy="3.25em"
+          dy="3em"
           fill="#000"
           fontSize={14}
           textAnchor="end"
