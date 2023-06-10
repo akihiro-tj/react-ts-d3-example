@@ -23,8 +23,8 @@ const CheckBoxGroup: FC<CheckBoxGroup> = ({ className }) => {
             control={
               <Checkbox
                 className="!p-0"
-                icon={<CheckBoxIcon isActive={false} />}
-                checkedIcon={<CheckBoxIcon isActive />}
+                icon={<CheckBoxIcon checked={false} />}
+                checkedIcon={<CheckBoxIcon checked />}
                 checked={item.checked}
                 data-id={item.id}
                 data-checked={item.checked || null}

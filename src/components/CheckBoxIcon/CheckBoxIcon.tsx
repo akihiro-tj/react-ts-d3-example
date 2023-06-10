@@ -3,15 +3,15 @@ import { FC } from 'react';
 
 type CheckBoxIcon = {
   className?: string;
-  isActive: boolean;
+  checked: boolean;
 };
 
-const CheckBoxIcon: FC<CheckBoxIcon> = ({ className, isActive }) => {
+const CheckBoxIcon: FC<CheckBoxIcon> = ({ className, checked }) => {
   return (
     <span
-      className={clsx(className, 'relative h-6 w-6', {
-        'bg-slate-200': !isActive,
-        'bg-slate-700': isActive,
+      className={clsx(className, 'relative block h-6 w-6', {
+        'bg-slate-200': !checked,
+        'bg-slate-700': checked,
       })}
     >
       <span
