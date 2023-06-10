@@ -1,4 +1,4 @@
-import { Slider as MUISlider } from '@mui/material';
+import MUISlider from '@mui/material/Slider';
 import clsx from 'clsx';
 import { FC } from 'react';
 
@@ -12,11 +12,17 @@ type Slider = {
 };
 
 const Slider: FC<Slider> = ({ className }) => {
-  const { sliderProps, playButtonProps } = useSlider();
+  const { sliderProps } = useSlider();
 
   return (
-    <div className={clsx(className, style.slider)}>
-      <PlayButton {...playButtonProps} />
+    <div
+      className={clsx(
+        className,
+        'flex items-center justify-between gap-3 py-4',
+        style.slider,
+      )}
+    >
+      <PlayButton />
       <MUISlider {...sliderProps} />
     </div>
   );

@@ -4,17 +4,7 @@ import PlayButton from './PlayButton';
 
 type Story = StoryObj<typeof PlayButton>;
 
-export const Play: Story = {
-  args: {
-    type: 'play',
-  },
-};
-
-export const Pause: Story = {
-  args: {
-    type: 'pause',
-  },
-};
+export const Default: Story = {};
 
 const meta: Meta<typeof PlayButton> = {
   title: 'PlayButton',

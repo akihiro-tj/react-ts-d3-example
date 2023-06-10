@@ -1,4 +1,6 @@
-import { FormControl, Select as MUISelect, MenuItem } from '@mui/material';
+import FormControl from '@mui/material/FormControl';
+import MenuItem from '@mui/material/MenuItem';
+import MUISelect from '@mui/material/Select';
 import clsx from 'clsx';
 import { FC } from 'react';
 
@@ -14,14 +16,18 @@ type Select = {
 const Select: FC<Select> = ({ className }) => {
   const {
     selectProps: { menuItems, value, onChange },
-    playButtonProps,
   } = useSlider();
 
   return (
-    <div className={clsx(className, style.select)}>
-      <PlayButton {...playButtonProps} />
+    <div
+      className={clsx(
+        className,
+        'flex w-48 items-center justify-between gap-2 py-4',
+        style.select,
+      )}
+    >
       <FormControl fullWidth>
-        <MUISelect value={value} onChange={onChange}>
+        <MUISelect className="bg-white" value={value} onChange={onChange}>
           {menuItems.map(item => (
             <MenuItem key={item.label} value={item.value}>
               {item.label}
@@ -29,6 +35,7 @@ const Select: FC<Select> = ({ className }) => {
           ))}
         </MUISelect>
       </FormControl>
+      <PlayButton />
     </div>
   );
 };
