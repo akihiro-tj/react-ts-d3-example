@@ -15,7 +15,7 @@ type Select = {
 
 const Select: FC<Select> = ({ className }) => {
   const {
-    selectProps: { menuItems, value, onChange },
+    selectProps: { menuItems, value, onChange, onOpen },
   } = useSlider();
 
   return (
@@ -27,7 +27,12 @@ const Select: FC<Select> = ({ className }) => {
       )}
     >
       <FormControl fullWidth>
-        <MUISelect className="bg-white" value={value} onChange={onChange}>
+        <MUISelect
+          className="bg-white"
+          value={value}
+          onChange={onChange}
+          onOpen={onOpen}
+        >
           {menuItems.map(item => (
             <MenuItem key={item.label} value={item.value}>
               {item.label}

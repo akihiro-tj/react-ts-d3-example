@@ -2,6 +2,7 @@ import { SelectChangeEvent } from '@mui/material/Select';
 import {
   MouseEventHandler,
   ReactNode,
+  SyntheticEvent,
   useCallback,
   useContext,
   useEffect,
@@ -52,6 +53,7 @@ const useSlider = () => {
     (event: Event, value: number | Array<number>, activeThumb: number) => {
       const index = typeof value === 'number' ? value : value[0];
       dispatch(updateYear(years[index]));
+      dispatch(updateIsAutoPlaying(false));
     },
     [dispatch, years],
   );
@@ -66,6 +68,13 @@ const useSlider = () => {
       );
     },
     [dispatch, years],
+  );
+
+  const onSelectOpen = useCallback(
+    (event: SyntheticEvent<Element, Event>) => {
+      dispatch(updateIsAutoPlaying(false));
+    },
+    [dispatch],
   );
 
   const play = useCallback(
@@ -113,6 +122,7 @@ const useSlider = () => {
       menuItems,
       value,
       onChange: onSelectChange,
+      onOpen: onSelectOpen,
     },
     playButtonProps: {
       isPlaying: isAutoPlaying,
