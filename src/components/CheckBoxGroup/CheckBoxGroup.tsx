@@ -18,7 +18,7 @@ const CheckBoxGroup: FC<CheckBoxGroup> = ({ className }) => {
         {items.map(item => (
           <FormControlLabel
             key={item.id}
-            className="!mx-0 w-40 bg-white p-2 hover:opacity-80"
+            className="!mx-0 w-40 grow bg-white p-2 hover:opacity-80"
             label={<CheckBoxLabel label={item.label} color={item.color} />}
             control={
               <Checkbox

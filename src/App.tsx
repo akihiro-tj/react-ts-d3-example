@@ -14,7 +14,7 @@ const App: FC = () => {
   return (
     <HashRouter>
       <div className="min-h-screen overflow-hidden bg-gray-50 pt-10">
-        <CheckBoxGroup className="mx-3 mb-6 max-w-screen-sm md:mx-auto" />
+        <CheckBoxGroup className="mx-3 mb-6 max-w-screen-sm sm:mx-auto" />
         <Routes>
           <Route path="/chart" element={<Chart />} />
           <Route path="/" element={<Navigate to="/chart" />} />
