@@ -17,7 +17,7 @@ export type Datum = {
   population: number;
 };
 
-export type Country = {
+export type Countries = {
   [key: string]: {
     continent: Continent;
     showLabel?: boolean;
