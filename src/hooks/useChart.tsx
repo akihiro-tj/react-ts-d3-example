@@ -10,22 +10,19 @@ import { calcArea, calcRadius } from '../util';
 import useResize from './useResize';
 import useWindowSize from './useWindowSize';
 
-const minRadius = 2;
-const maxRadius = 20;
-
 const breakPoint = 600;
 
 const margins = {
   mobile: {
     top: 40,
     right: 60,
-    bottom: 60,
+    bottom: 65,
     left: 50,
   },
   laptop: {
     top: 50,
     right: 35,
-    bottom: 65,
+    bottom: 70,
     left: 60,
   },
 };
@@ -33,6 +30,17 @@ const margins = {
 const aspects = {
   mobile: 5 / 4,
   laptop: 3 / 5,
+};
+
+const radiusRanges = {
+  mobile: {
+    min: 1,
+    max: 12,
+  },
+  laptop: {
+    min: 2,
+    max: 20,
+  },
 };
 
 const xTickArrays = {
@@ -62,6 +70,10 @@ const useChart = () => {
 
   const aspect = useMemo(() => {
     return aspects[device];
+  }, [device]);
+
+  const radiusRange = useMemo(() => {
+    return radiusRanges[device];
   }, [device]);
 
   const xTickArray = useMemo(() => {
@@ -110,12 +122,12 @@ const useChart = () => {
 
     const area = scaleLinear()
       .domain([0, max(data, d => d.population) as number])
-      .range([calcArea(minRadius), calcArea(maxRadius)]);
+      .range([calcArea(radiusRange.min), calcArea(radiusRange.max)]);
 
     const radius = (value: number) => calcRadius(area(value));
 
     return { x, y, radius };
-  }, [data, size, margin]);
+  }, [data, size, margin, radiusRange]);
 
   const plots = useMemo(() => {
     return data
@@ -154,6 +166,27 @@ const useChart = () => {
     };
   }, [year, margin, yearLabelSize]);
 
+  const legendItems = useMemo(() => {
+    return [
+      {
+        label: '10億',
+        radius: scale.radius(1000000000),
+      },
+      {
+        label: '5億',
+        radius: scale.radius(500000000),
+      },
+      {
+        label: '1億',
+        radius: scale.radius(100000000),
+      },
+      {
+        label: '1000万',
+        radius: scale.radius(10000000),
+      },
+    ];
+  }, [scale]);
+
   return {
     ref,
     margin,
@@ -164,6 +197,7 @@ const useChart = () => {
     plots,
     labels,
     yearLabel,
+    legendItems,
   };
 };
 

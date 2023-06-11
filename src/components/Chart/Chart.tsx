@@ -9,6 +9,7 @@ import Container from '../Container/Container';
 import GridX from '../GridX/GridX';
 import GridY from '../GridY/GridY';
 import Label from '../Label/Label';
+import Legend from '../Legend/Legend';
 import Plot from '../Plot/Plot';
 import SVGChart from '../SVGChart/SVGChart';
 
@@ -27,11 +28,17 @@ const Chart: FC<Chart> = ({ className }) => {
     plots,
     labels,
     yearLabel,
+    legendItems,
   } = useChart();
 
   return (
     <div className={clsx(className, 'overflow-hidden py-1')}>
       <Card>
+        <Legend
+          className="px-3 pb-3 pt-4 sm:px-5 sm:pt-6"
+          heading="人口"
+          items={legendItems}
+        />
         <Container ref={ref}>
           <SVGChart {...size}>
             <GridX
