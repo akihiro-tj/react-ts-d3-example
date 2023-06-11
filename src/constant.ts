@@ -1,7 +1,7 @@
 import { scaleOrdinal } from 'd3-scale';
 import { schemeCategory10 } from 'd3-scale-chromatic';
 
-import { Country } from './types';
+import { Countries } from './types';
 
 export const continentNames = {
   Asia: 'アジア',
@@ -30,7 +30,7 @@ export const colors = continents.reduce(
   {} as { [key: string]: string },
 );
 
-export const countries: Country = {
+export const countries: Countries = {
   Afghanistan: {
     continent: 'Asia',
   },

@@ -28,6 +28,9 @@ const Chart: FC<Chart> = ({ className }) => {
     plots,
     labels,
     yearLabel,
+    onMouseEnter,
+    onMouseMove,
+    onMouseLeave,
     legendItems,
   } = useChart();
 
@@ -66,7 +69,13 @@ const Chart: FC<Chart> = ({ className }) => {
               labelX={size.width - margin.right}
             />
             {plots.map(plot => (
-              <Plot key={plot.id} {...plot} />
+              <Plot
+                key={plot.id}
+                {...plot}
+                onMouseEnter={onMouseEnter}
+                onMouseMove={onMouseMove}
+                onMouseLeave={onMouseLeave}
+              />
             ))}
             {labels.map(label => (
               <Label key={label.id} {...label} />
