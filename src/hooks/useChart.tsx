@@ -1,7 +1,14 @@
 import { extent, max } from 'd3-array';
 import { format } from 'd3-format';
 import { NumberValue, scaleLinear, scaleLog } from 'd3-scale';
-import { useCallback, useContext, useMemo, useRef, useState } from 'react';
+import {
+  MouseEventHandler,
+  useCallback,
+  useContext,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 
 import { colors } from '../constant';
 import { AppContext } from '../providers/app/AppContextProvider';
@@ -21,7 +28,7 @@ const margins = {
   },
   laptop: {
     top: 50,
-    right: 35,
+    right: 45,
     bottom: 70,
     left: 60,
   },
@@ -56,6 +63,7 @@ const yearLabelSizes = {
 const useChart = () => {
   const ref = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState({ width: 0, height: 0 });
+  const [hoveredCountry, setHoveredCountry] = useState<string>();
   const { data, year, checkBoxGroup } = useContext(AppContext);
 
   const windowSize = useWindowSize();
@@ -132,29 +140,47 @@ const useChart = () => {
   const plots = useMemo(() => {
     return data
       .filter(d => d.year === year)
-      .map(d => ({
-        id: d.country,
-        x: scale.x(d.gdp),
-        y: scale.y(d.life),
-        radius: scale.radius(d.population),
-        color: colors[d.continent],
-        strokeOpacity: checkBoxGroup[d.continent] ? 1 : 0.2,
-        fillOpacity: checkBoxGroup[d.continent] ? 0.7 : 0.1,
-      }));
-  }, [data, year, scale, checkBoxGroup]);
+      .map(d => {
+        const focused =
+          checkBoxGroup[d.continent] &&
+          (!hoveredCountry || d.country === hoveredCountry);
+
+        return {
+          id: d.country,
+          x: scale.x(d.gdp),
+          y: scale.y(d.life),
+          radius: scale.radius(d.population),
+          color: colors[d.continent],
+          strokeOpacity: focused ? 1 : 0.2,
+          fillOpacity: focused ? 0.7 : 0.1,
+          disabled: !checkBoxGroup[d.continent],
+        };
+      });
+  }, [data, year, scale, checkBoxGroup, hoveredCountry]);
 
   const labels = useMemo(() => {
     return data
-      .filter(d => d.year === year && d.showLabel)
-      .map(d => ({
-        id: d.country,
-        x: scale.x(d.gdp),
-        y: scale.y(d.life) - scale.radius(d.population),
-        text: d.country,
-        color: colors[d.continent],
-        opacity: checkBoxGroup[d.continent] ? 1 : 0.2,
-      }));
-  }, [data, year, scale, checkBoxGroup]);
+      .filter(
+        d =>
+          d.year === year &&
+          (d.showLabel ||
+            (checkBoxGroup[d.continent] && d.country === hoveredCountry)),
+      )
+      .map(d => {
+        const focused =
+          checkBoxGroup[d.continent] &&
+          (!hoveredCountry || d.country === hoveredCountry);
+
+        return {
+          id: d.country,
+          x: scale.x(d.gdp),
+          y: scale.y(d.life) - scale.radius(d.population),
+          text: d.country,
+          color: colors[d.continent],
+          opacity: focused ? 1 : 0.2,
+        };
+      });
+  }, [data, year, scale, checkBoxGroup, hoveredCountry]);
 
   const yearLabel = useMemo(() => {
     return {
@@ -165,6 +191,18 @@ const useChart = () => {
       size: yearLabelSize,
     };
   }, [year, margin, yearLabelSize]);
+
+  const onMouseEnter: MouseEventHandler<SVGCircleElement> = useCallback(e => {
+    setHoveredCountry(e.currentTarget.getAttribute('data-id') || undefined);
+  }, []);
+
+  const onMouseMove: MouseEventHandler<SVGCircleElement> = useCallback(e => {
+    setHoveredCountry(e.currentTarget.getAttribute('data-id') || undefined);
+  }, []);
+
+  const onMouseLeave: MouseEventHandler<SVGCircleElement> = useCallback(() => {
+    setHoveredCountry(undefined);
+  }, []);
 
   const legendItems = useMemo(() => {
     return [
@@ -197,6 +235,9 @@ const useChart = () => {
     plots,
     labels,
     yearLabel,
+    onMouseEnter,
+    onMouseMove,
+    onMouseLeave,
     legendItems,
   };
 };
