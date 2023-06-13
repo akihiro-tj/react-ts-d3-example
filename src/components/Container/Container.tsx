@@ -1,19 +1,16 @@
 import { ReactNode, forwardRef } from 'react';
 
-type Container = {
+type ContainerProps = {
   className?: string;
   children?: ReactNode;
 };
 
-const Container = forwardRef<HTMLDivElement, Container>(function Container(
-  { className, children },
-  ref,
-) {
-  return (
-    <div ref={ref} className={className}>
-      {children}
-    </div>
-  );
-});
-
-export default Container;
+export const Container = forwardRef<HTMLDivElement, ContainerProps>(
+  function Container({ className, children }, ref) {
+    return (
+      <div ref={ref} className={className}>
+        {children}
+      </div>
+    );
+  },
+);

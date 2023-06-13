@@ -1,16 +1,14 @@
-import { continents } from '../../constant';
+import { continents } from '../../config';
 import { Action, Continent, CheckBoxGroup, Datum } from '../../types';
 
 export type AppState = {
   data: Datum[];
-  year: number;
   isAutoPlaying: boolean;
   checkBoxGroup: CheckBoxGroup;
 };
 
 export const initialAppState: AppState = {
   data: [],
-  year: 2018,
   isAutoPlaying: false,
   checkBoxGroup: continents.reduce((acc, cur) => {
     return {
@@ -22,7 +20,6 @@ export const initialAppState: AppState = {
 
 // Action types
 const UPDATE_DATA = 'UPDATE_DATA';
-const UPDATE_YEAR = 'UPDATE_YEAR';
 const UPDATE_IS_AUTO_PLAYING = 'UPDATE_IS_AUTO_PLAYING';
 const UPDATE_CHECK_BOX_GROUP = 'UPDATE_CHECK_BOX_GROUP';
 
@@ -31,13 +28,6 @@ export const updateData = (data: Datum[]) => {
   return {
     type: UPDATE_DATA,
     payload: data,
-  };
-};
-
-export const updateYear = (year: number) => {
-  return {
-    type: UPDATE_YEAR,
-    payload: year,
   };
 };
 
@@ -62,13 +52,6 @@ export const appReducer = (state: AppState, action: Action): AppState => {
       return {
         ...state,
         data: action.payload,
-      };
-    }
-
-    case UPDATE_YEAR: {
-      return {
-        ...state,
-        year: action.payload,
       };
     }
 

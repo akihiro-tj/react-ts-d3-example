@@ -6,13 +6,13 @@ type Item = {
   radius: number;
 };
 
-type Legend = {
+type LegendProps = {
   className?: string;
   heading: string;
   items: Item[];
 };
 
-const Legend: FC<Legend> = ({ className, heading, items }) => {
+export const Legend: FC<LegendProps> = ({ className, heading, items }) => {
   return (
     <div className={clsx(className, 'flex items-end gap-2 sm:gap-4')}>
       <div className="text-sm">{heading}：</div>
@@ -33,5 +33,3 @@ const Legend: FC<Legend> = ({ className, heading, items }) => {
     </div>
   );
 };
-
-export default Legend;

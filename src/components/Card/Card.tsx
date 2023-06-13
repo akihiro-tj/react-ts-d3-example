@@ -1,22 +1,17 @@
 import clsx from 'clsx';
 import { FC, ReactNode } from 'react';
 
-type Card = {
+type CardProps = {
   className?: string;
   children?: ReactNode;
 };
 
-const Card: FC<Card> = ({ className, children }) => {
+export const Card: FC<CardProps> = ({ className, children }) => {
   return (
     <div
-      className={clsx(
-        className,
-        'relative mx-3 max-w-screen-md bg-white shadow md:mx-auto',
-      )}
+      className={clsx(className, 'relative overflow-hidden bg-white shadow')}
     >
       {children}
     </div>
   );
 };
-
-export default Card;

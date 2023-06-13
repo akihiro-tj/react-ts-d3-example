@@ -10,12 +10,13 @@ import {
   useState,
 } from 'react';
 
-import { colors } from '../constant';
+import { colors } from '../config';
 import { AppContext } from '../providers/app/AppContextProvider';
-import { calcArea, calcRadius } from '../util';
+import { calcArea, calcRadius } from '../utils/calc';
 
 import useResize from './useResize';
 import useWindowSize from './useWindowSize';
+import useYearSelector from './useYearSelector';
 
 const breakPoint = 600;
 
@@ -64,9 +65,10 @@ const useChart = () => {
   const ref = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState({ width: 0, height: 0 });
   const [hoveredCountry, setHoveredCountry] = useState<string>();
-  const { data, year, checkBoxGroup } = useContext(AppContext);
+  const { data, checkBoxGroup } = useContext(AppContext);
 
   const windowSize = useWindowSize();
+  const { year } = useYearSelector();
 
   const device = useMemo(() => {
     return windowSize.width < breakPoint ? 'mobile' : 'laptop';
