@@ -8,7 +8,7 @@ export const ErrorFallback: FC = () => {
   const { onClick } = useErrorFallback();
 
   return (
-    <BackGround className="pt-10">
+    <BackGround className="py-10">
       <div className="mx-auto max-w-screen-sm">
         <p className="mb-5">エラーが発生しました。</p>
         <Button variant="outlined" onClick={onClick}>

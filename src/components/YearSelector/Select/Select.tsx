@@ -22,7 +22,7 @@ export const Select: FC<SelectProps> = ({ className }) => {
     <div
       className={clsx(
         className,
-        'flex w-48 items-center justify-between gap-2 py-4',
+        'flex w-48 items-center justify-between gap-2',
         style.select,
       )}
     >

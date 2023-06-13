@@ -4,20 +4,31 @@ import useData from '../../../hooks/useData';
 import { Card } from '../../Card';
 import { Chart } from '../../Chart';
 import { CheckBoxGroup } from '../../CheckBox';
+import { Footer } from '../../Footer';
+import { Heading } from '../../Heading';
 import { Select, Slider } from '../../YearSelector';
 import { BackGround } from '../BackGround';
+import { Rail } from '../Rail';
 
 export const MainLayout: FC = () => {
   useData();
 
   return (
-    <BackGround>
-      <CheckBoxGroup className="mx-3 mb-6 mt-10 max-w-screen-sm sm:mx-auto" />
-      <Card className="mx-3 max-w-screen-md md:mx-auto">
+    <BackGround className="py-10">
+      <Rail className="mb-6">
+        <Heading />
+        <CheckBoxGroup className="mx-3 sm:mx-auto" />
+      </Rail>
+
+      <Card className="mx-3 mb-6 max-w-screen-md md:mx-auto">
         <Chart />
       </Card>
-      <Slider className="mx-auto hidden max-w-screen-sm pr-6 sm:flex" />
-      <Select className="mx-auto flex sm:hidden" />
+
+      <Rail>
+        <Slider className="mx-auto hidden pr-6 sm:flex" />
+        <Select className="mx-auto flex sm:hidden" />
+        <Footer />
+      </Rail>
     </BackGround>
   );
 };

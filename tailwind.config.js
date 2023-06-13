@@ -8,5 +8,5 @@ export default {
       md: '768px',
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/typography')],
 };
