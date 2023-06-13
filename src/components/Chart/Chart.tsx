@@ -2,22 +2,22 @@ import clsx from 'clsx';
 import { FC } from 'react';
 
 import useChart from '../../hooks/useChart';
-import AxisBottom from '../AxisBottom/AxisBottom';
-import AxisLeft from '../AxisLeft/AxisLeft';
-import Card from '../Card/Card';
-import Container from '../Container/Container';
-import GridX from '../GridX/GridX';
-import GridY from '../GridY/GridY';
-import Label from '../Label/Label';
-import Legend from '../Legend/Legend';
-import Plot from '../Plot/Plot';
-import SVGChart from '../SVGChart/SVGChart';
+import { AxisBottom } from '../AxisBottom';
+import { AxisLeft } from '../AxisLeft/AxisLeft';
+import { Card } from '../Card/Card';
+import { Container } from '../Container/Container';
+import { GridX } from '../GridX/GridX';
+import { GridY } from '../GridY/GridY';
+import { Label } from '../Label/Label';
+import { Legend } from '../Legend/Legend';
+import { Plot } from '../Plot/Plot';
+import { SVGChart } from '../SVGChart/SVGChart';
 
-type Chart = {
+type ChartProps = {
   className?: string;
 };
 
-const Chart: FC<Chart> = ({ className }) => {
+export const Chart: FC<ChartProps> = ({ className }) => {
   const {
     ref,
     margin,
@@ -87,5 +87,3 @@ const Chart: FC<Chart> = ({ className }) => {
     </div>
   );
 };
-
-export default Chart;

@@ -6,14 +6,14 @@ import { FC, useEffect, useRef } from 'react';
 
 import style from './GridY.module.scss';
 
-type GridY = {
+type GridYProps = {
   className?: string;
   minY: number;
   maxY: number;
   scale: ScaleLinear<number, number, never>;
 };
 
-const GridY: FC<GridY> = ({ className, minY, maxY, scale }) => {
+export const GridY: FC<GridYProps> = ({ className, minY, maxY, scale }) => {
   const ref = useRef<SVGGElement>(null);
 
   useEffect(() => {
@@ -38,5 +38,3 @@ const GridY: FC<GridY> = ({ className, minY, maxY, scale }) => {
     />
   );
 };
-
-export default GridY;

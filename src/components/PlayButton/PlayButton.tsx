@@ -8,11 +8,11 @@ import useSlider from '../../hooks/useSlider';
 
 import style from './PlayButton.module.scss';
 
-type PlayButton = {
+type PlayButtonProps = {
   className?: string;
 };
 
-const PlayButton: FC<PlayButton> = ({ className }) => {
+export const PlayButton: FC<PlayButtonProps> = ({ className }) => {
   const {
     playButtonProps: { isPlaying, onClick },
   } = useSlider();
@@ -27,5 +27,3 @@ const PlayButton: FC<PlayButton> = ({ className }) => {
     </IconButton>
   );
 };
-
-export default PlayButton;

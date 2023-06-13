@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import CheckBoxLabel from './CheckBoxLabel';
+import { CheckBoxLabel } from './CheckBoxLabel';
 
 type Story = StoryObj<typeof CheckBoxLabel>;
 

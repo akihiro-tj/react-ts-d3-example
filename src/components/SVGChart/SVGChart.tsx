@@ -1,14 +1,19 @@
 import clsx from 'clsx';
 import { FC, ReactNode } from 'react';
 
-type SVGChart = {
+type SVGChartProps = {
   className?: string;
   children?: ReactNode;
   width: number;
   height: number;
 };
 
-const SVGChart: FC<SVGChart> = ({ className, children, width, height }) => {
+export const SVGChart: FC<SVGChartProps> = ({
+  className,
+  children,
+  width,
+  height,
+}) => {
   return (
     <div className={clsx(className, 'relative h-full w-full')}>
       <svg
@@ -22,5 +27,3 @@ const SVGChart: FC<SVGChart> = ({ className, children, width, height }) => {
     </div>
   );
 };
-
-export default SVGChart;

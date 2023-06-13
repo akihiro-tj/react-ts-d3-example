@@ -4,14 +4,14 @@ import FormGroup from '@mui/material/FormGroup';
 import { FC } from 'react';
 
 import { useCheckBoxGroup } from '../../hooks/useCheckBoxGroup';
-import CheckBoxIcon from '../CheckBoxIcon/CheckBoxIcon';
-import CheckBoxLabel from '../CheckBoxLabel/CheckBoxLabel';
+import { CheckBoxIcon } from '../CheckBoxIcon/CheckBoxIcon';
+import { CheckBoxLabel } from '../CheckBoxLabel/CheckBoxLabel';
 
-type CheckBoxGroup = {
+type CheckBoxGroupProps = {
   className?: string;
 };
 
-const CheckBoxGroup: FC<CheckBoxGroup> = ({ className }) => {
+export const CheckBoxGroup: FC<CheckBoxGroupProps> = ({ className }) => {
   const { items, onClick } = useCheckBoxGroup();
 
   return (
@@ -39,5 +39,3 @@ const CheckBoxGroup: FC<CheckBoxGroup> = ({ className }) => {
     </div>
   );
 };
-
-export default CheckBoxGroup;

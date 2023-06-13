@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import Legend from './Legend';
+import { Legend } from './Legend';
 
 type Story = StoryObj<typeof Legend>;
 

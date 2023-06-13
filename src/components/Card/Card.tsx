@@ -1,12 +1,12 @@
 import clsx from 'clsx';
 import { FC, ReactNode } from 'react';
 
-type Card = {
+type CardProps = {
   className?: string;
   children?: ReactNode;
 };
 
-const Card: FC<Card> = ({ className, children }) => {
+export const Card: FC<CardProps> = ({ className, children }) => {
   return (
     <div
       className={clsx(
@@ -18,5 +18,3 @@ const Card: FC<Card> = ({ className, children }) => {
     </div>
   );
 };
-
-export default Card;

@@ -5,15 +5,15 @@ import clsx from 'clsx';
 import { FC } from 'react';
 
 import useSlider from '../../hooks/useSlider';
-import PlayButton from '../PlayButton/PlayButton';
+import { PlayButton } from '../PlayButton/PlayButton';
 
 import style from './Select.module.scss';
 
-type Select = {
+type SelectProps = {
   className?: string;
 };
 
-const Select: FC<Select> = ({ className }) => {
+export const Select: FC<SelectProps> = ({ className }) => {
   const {
     selectProps: { menuItems, value, onChange, onOpen },
   } = useSlider();
@@ -44,5 +44,3 @@ const Select: FC<Select> = ({ className }) => {
     </div>
   );
 };
-
-export default Select;

@@ -3,15 +3,15 @@ import clsx from 'clsx';
 import { FC } from 'react';
 
 import useSlider from '../../hooks/useSlider';
-import PlayButton from '../PlayButton/PlayButton';
+import { PlayButton } from '../PlayButton/PlayButton';
 
 import style from './Slider.module.scss';
 
-type Slider = {
+type SliderProps = {
   className?: string;
 };
 
-const Slider: FC<Slider> = ({ className }) => {
+export const Slider: FC<SliderProps> = ({ className }) => {
   const { sliderProps } = useSlider();
 
   return (
@@ -27,5 +27,3 @@ const Slider: FC<Slider> = ({ className }) => {
     </div>
   );
 };
-
-export default Slider;

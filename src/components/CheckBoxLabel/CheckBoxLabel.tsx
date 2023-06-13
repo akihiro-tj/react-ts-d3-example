@@ -1,13 +1,17 @@
 import clsx from 'clsx';
 import { FC } from 'react';
 
-type CheckBoxLabel = {
+type CheckBoxLabelProps = {
   className?: string;
   label: string;
   color: string;
 };
 
-const CheckBoxLabel: FC<CheckBoxLabel> = ({ className, label, color }) => {
+export const CheckBoxLabel: FC<CheckBoxLabelProps> = ({
+  className,
+  label,
+  color,
+}) => {
   return (
     <span className={clsx(className, 'flex items-center gap-2 py-0 pl-3')}>
       <span
@@ -21,5 +25,3 @@ const CheckBoxLabel: FC<CheckBoxLabel> = ({ className, label, color }) => {
     </span>
   );
 };
-
-export default CheckBoxLabel;

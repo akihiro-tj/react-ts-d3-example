@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { FC, MouseEventHandler } from 'react';
 
-type Plot = {
+type PlotProps = {
   className?: string;
   id?: string;
   x: number;
@@ -16,7 +16,7 @@ type Plot = {
   onMouseLeave?: MouseEventHandler<SVGCircleElement>;
 };
 
-const Plot: FC<Plot> = ({
+export const Plot: FC<PlotProps> = ({
   className,
   id,
   x,
@@ -51,5 +51,3 @@ const Plot: FC<Plot> = ({
     </g>
   );
 };
-
-export default Plot;

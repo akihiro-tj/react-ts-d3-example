@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import PlayButton from './PlayButton';
+import { PlayButton } from './PlayButton';
 
 type Story = StoryObj<typeof PlayButton>;
 

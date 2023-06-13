@@ -6,7 +6,7 @@ import { FC, useEffect, useRef } from 'react';
 
 import style from './AxisBottom.module.scss';
 
-type AxisBottom = {
+type AxisBottomProps = {
   className?: string;
   y: number;
   scale: ScaleLinear<number, number, never>;
@@ -15,7 +15,7 @@ type AxisBottom = {
   labelX?: number;
 };
 
-const AxisBottom: FC<AxisBottom> = ({
+export const AxisBottom: FC<AxisBottomProps> = ({
   className,
   y,
   scale,
@@ -55,5 +55,3 @@ const AxisBottom: FC<AxisBottom> = ({
     </g>
   );
 };
-
-export default AxisBottom;

@@ -6,7 +6,7 @@ import { FC, useEffect, useRef } from 'react';
 
 import style from './AxisLeft.module.scss';
 
-type AxisLeft = {
+type AxisLeftProps = {
   className?: string;
   x: number;
   scale: ScaleLinear<number, number, never>;
@@ -15,7 +15,7 @@ type AxisLeft = {
   labelY?: number;
 };
 
-const AxisLeft: FC<AxisLeft> = ({
+export const AxisLeft: FC<AxisLeftProps> = ({
   className,
   x,
   scale,
@@ -54,5 +54,3 @@ const AxisLeft: FC<AxisLeft> = ({
     </g>
   );
 };
-
-export default AxisLeft;

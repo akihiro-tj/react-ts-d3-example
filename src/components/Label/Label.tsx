@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-type Label = {
+type LabelProps = {
   className?: string;
   x: number;
   y: number;
@@ -10,7 +10,7 @@ type Label = {
   opacity?: number;
 };
 
-const Label: FC<Label> = ({
+export const Label: FC<LabelProps> = ({
   className,
   x,
   y,
@@ -49,5 +49,3 @@ const Label: FC<Label> = ({
     </g>
   );
 };
-
-export default Label;

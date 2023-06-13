@@ -1,10 +1,10 @@
 import { FC } from 'react';
 
 import useData from '../../hooks/useData';
-import Chart from '../Chart/Chart';
-import CheckBoxGroup from '../CheckBoxGroup/CheckBoxGroup';
-import Select from '../Select/Select';
-import Slider from '../Slider/Slider';
+import { Chart } from '../Chart/Chart';
+import { CheckBoxGroup } from '../CheckBoxGroup/CheckBoxGroup';
+import { Select } from '../Select/Select';
+import { Slider } from '../Slider/Slider';
 
 export const Main: FC = () => {
   useData();

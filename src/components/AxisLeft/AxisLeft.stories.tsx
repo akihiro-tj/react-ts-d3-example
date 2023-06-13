@@ -4,11 +4,11 @@ import { scaleLinear } from 'd3-scale';
 import { useMemo } from 'react';
 
 import useChart from '../../hooks/useChart';
-import Card from '../Card/Card';
-import Container from '../Container/Container';
-import SVGChart from '../SVGChart/SVGChart';
+import { Card } from '../Card/Card';
+import { Container } from '../Container/Container';
+import { SVGChart } from '../SVGChart/SVGChart';
 
-import AxisLeft from './AxisLeft';
+import { AxisLeft } from './AxisLeft';
 
 type Story = StoryObj<typeof Mock>;
 

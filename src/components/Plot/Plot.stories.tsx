@@ -1,12 +1,12 @@
 import { Meta, StoryFn, StoryObj } from '@storybook/react';
 
 import useChart from '../../hooks/useChart';
-import Card from '../Card/Card';
-import Container from '../Container/Container';
-import Label from '../Label/Label';
-import SVGChart from '../SVGChart/SVGChart';
+import { Card } from '../Card/Card';
+import { Container } from '../Container/Container';
+import { Label } from '../Label/Label';
+import { SVGChart } from '../SVGChart/SVGChart';
 
-import Plot from './Plot';
+import { Plot } from './Plot';
 
 type Story = StoryObj<typeof Mock>;
 

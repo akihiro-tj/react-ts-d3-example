@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import CheckBoxIcon from './CheckBoxIcon';
+import { CheckBoxIcon } from './CheckBoxIcon';
 
 type Story = StoryObj<typeof CheckBoxIcon>;
 

@@ -1,12 +1,12 @@
 import clsx from 'clsx';
 import { FC } from 'react';
 
-type CheckBoxIcon = {
+type CheckBoxIconProps = {
   className?: string;
   checked: boolean;
 };
 
-const CheckBoxIcon: FC<CheckBoxIcon> = ({ className, checked }) => {
+export const CheckBoxIcon: FC<CheckBoxIconProps> = ({ className, checked }) => {
   return (
     <span
       className={clsx(className, 'relative block h-6 w-6', {
@@ -30,5 +30,3 @@ const CheckBoxIcon: FC<CheckBoxIcon> = ({ className, checked }) => {
     </span>
   );
 };
-
-export default CheckBoxIcon;

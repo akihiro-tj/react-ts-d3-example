@@ -6,14 +6,14 @@ import { FC, useEffect, useRef } from 'react';
 
 import style from './GridX.module.scss';
 
-type GridX = {
+type GridXProps = {
   className?: string;
   minX: number;
   maxX: number;
   scale: ScaleLinear<number, number, never>;
 };
 
-const GridX: FC<GridX> = ({ className, minX, maxX, scale }) => {
+export const GridX: FC<GridXProps> = ({ className, minX, maxX, scale }) => {
   const ref = useRef<SVGGElement>(null);
 
   useEffect(() => {
@@ -38,5 +38,3 @@ const GridX: FC<GridX> = ({ className, minX, maxX, scale }) => {
     />
   );
 };
-
-export default GridX;
