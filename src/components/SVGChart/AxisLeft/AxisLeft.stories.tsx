@@ -3,9 +3,7 @@ import { extent } from 'd3-array';
 import { scaleLinear } from 'd3-scale';
 import { useMemo } from 'react';
 
-import useChart from '../../../hooks/useChart';
-import { Card } from '../../Card';
-import { Container } from '../../Container';
+import { Card } from '../../Layout';
 import { SVG } from '../SVG';
 
 import { AxisLeft } from './index';
@@ -14,12 +12,20 @@ type Story = StoryObj<typeof Mock>;
 
 type MockArgs = {
   data: number[];
+  margin: {
+    top: number;
+    right: number;
+    bottom: number;
+    left: number;
+  };
+  size: {
+    width: number;
+    height: number;
+  };
   label?: string;
 };
 
-const Mock: StoryFn<MockArgs> = ({ data, label }) => {
-  const { ref, size, margin } = useChart();
-
+const Mock: StoryFn<MockArgs> = ({ data, margin, size, label }) => {
   const scale = useMemo(() => {
     return scaleLinear()
       .domain(extent(data) as [number, number])
@@ -29,16 +35,14 @@ const Mock: StoryFn<MockArgs> = ({ data, label }) => {
 
   return (
     <Card>
-      <Container ref={ref}>
-        <SVG {...size}>
-          <AxisLeft
-            x={margin.left}
-            scale={scale}
-            label={label}
-            labelY={margin.top - 12}
-          />
-        </SVG>
-      </Container>
+      <SVG {...size}>
+        <AxisLeft
+          x={margin.left}
+          scale={scale}
+          label={label}
+          labelY={margin.top - 12}
+        />
+      </SVG>
     </Card>
   );
 };
@@ -46,12 +50,16 @@ const Mock: StoryFn<MockArgs> = ({ data, label }) => {
 export const Default: Story = {
   args: {
     data: [20, 40, 130, 55, 70],
+    margin: { top: 50, right: 45, bottom: 70, left: 60 },
+    size: { width: 600, height: 450 },
   },
 };
 
 export const ShowLabel: Story = {
   args: {
     data: [20, 40, 130, 55, 70],
+    margin: { top: 50, right: 45, bottom: 70, left: 60 },
+    size: { width: 600, height: 450 },
     label: 'hoge',
   },
 };

@@ -1,13 +1,13 @@
 import { FC } from 'react';
 
 import useData from '../../../hooks/useData';
-import { Card } from '../../Card';
 import { Chart } from '../../Chart';
 import { CheckBoxGroup } from '../../CheckBox';
 import { Footer } from '../../Footer';
 import { Heading } from '../../Heading';
 import { Select, Slider } from '../../YearSelector';
 import { BackGround } from '../BackGround';
+import { Card } from '../Card';
 import { Rail } from '../Rail';
 
 export const MainLayout: FC = () => {
