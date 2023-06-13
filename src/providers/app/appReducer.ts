@@ -1,4 +1,4 @@
-import { continents } from '../../constant';
+import { continents } from '../../config';
 import { Action, Continent, CheckBoxGroup, Datum } from '../../types';
 
 export type AppState = {

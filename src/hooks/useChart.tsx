@@ -10,7 +10,7 @@ import {
   useState,
 } from 'react';
 
-import { colors } from '../constant';
+import { colors } from '../config';
 import { AppContext } from '../providers/app/AppContextProvider';
 import { calcArea, calcRadius } from '../utils/calc';
 

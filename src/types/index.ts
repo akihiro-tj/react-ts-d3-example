@@ -1,4 +1,4 @@
-import { continents } from '../constant';
+import { continents } from '../config';
 
 export type Action = {
   type: string;

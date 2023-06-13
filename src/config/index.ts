@@ -1,7 +1,7 @@
 import { scaleOrdinal } from 'd3-scale';
 import { schemeCategory10 } from 'd3-scale-chromatic';
 
-import { Countries } from './types';
+import { Countries } from '../types';
 
 export const continentNames = {
   Asia: 'アジア',

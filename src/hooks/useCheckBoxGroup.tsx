@@ -1,6 +1,6 @@
 import { MouseEventHandler, useCallback, useContext, useMemo } from 'react';
 
-import { colors, continentNames, continents } from '../constant';
+import { colors, continentNames, continents } from '../config';
 import {
   AppContext,
   AppUpdateContext,
