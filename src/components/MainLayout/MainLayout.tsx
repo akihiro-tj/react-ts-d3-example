@@ -5,7 +5,7 @@ import { Chart } from '../Chart';
 import { CheckBoxGroup } from '../CheckBox';
 import { Select, Slider } from '../YearSelector';
 
-export const Main: FC = () => {
+export const MainLayout: FC = () => {
   useData();
 
   return (
