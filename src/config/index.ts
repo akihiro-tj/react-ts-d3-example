@@ -3,6 +3,9 @@ import { schemeCategory10 } from 'd3-scale-chromatic';
 
 import { Countries } from '../types';
 
+export const minYear = 1950;
+export const maxYear = 2018;
+
 export const continentNames = {
   Asia: 'アジア',
   Oceania: 'オセアニア',

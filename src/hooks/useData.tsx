@@ -1,14 +1,11 @@
 import { useContext, useEffect } from 'react';
 
-import { countries } from '../config';
+import { countries, maxYear, minYear } from '../config';
 import { AppUpdateContext } from '../providers/app/AppContextProvider';
 import { updateData } from '../providers/app/appReducer';
 import { Datum } from '../types';
 
 import useCSV from './useCSV';
-
-const minYear = 1950;
-const maxYear = 2018;
 
 const useData = () => {
   const dispatch = useContext(AppUpdateContext);
