@@ -6,6 +6,7 @@ type Story = StoryObj<typeof Card>;
 
 export const Default: Story = {
   args: {
+    className: 'mx-3 max-w-screen-md md:mx-auto',
     children: <div className="h-96" />,
   },
 };

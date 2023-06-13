@@ -9,10 +9,7 @@ type CardProps = {
 export const Card: FC<CardProps> = ({ className, children }) => {
   return (
     <div
-      className={clsx(
-        className,
-        'relative mx-3 max-w-screen-md bg-white shadow md:mx-auto',
-      )}
+      className={clsx(className, 'relative overflow-hidden bg-white shadow')}
     >
       {children}
     </div>
