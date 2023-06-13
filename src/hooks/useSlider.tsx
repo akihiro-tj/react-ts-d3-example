@@ -8,16 +8,23 @@ import {
   useEffect,
   useMemo,
 } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import {
   AppContext,
   AppUpdateContext,
 } from '../providers/app/AppContextProvider';
-import { updateIsAutoPlaying, updateYear } from '../providers/app/appReducer';
+import { updateIsAutoPlaying } from '../providers/app/appReducer';
 
 const useSlider = () => {
-  const { data, year, isAutoPlaying } = useContext(AppContext);
+  const { data, isAutoPlaying } = useContext(AppContext);
   const dispatch = useContext(AppUpdateContext);
+  const params = useParams();
+  const navigate = useNavigate();
+
+  const year = useMemo(() => {
+    return parseFloat(params.year || '');
+  }, [params]);
 
   const years = useMemo(() => {
     return Array.from(new Set(data.map(d => d.year)))
@@ -52,22 +59,20 @@ const useSlider = () => {
   const onSliderChange = useCallback(
     (event: Event, value: number | Array<number>, activeThumb: number) => {
       const index = typeof value === 'number' ? value : value[0];
-      dispatch(updateYear(years[index]));
       dispatch(updateIsAutoPlaying(false));
+      navigate(`/${years[index]}`);
     },
-    [dispatch, years],
+    [dispatch, years, navigate],
   );
 
   const onSelectChange = useCallback(
     (event: SelectChangeEvent<number>, child: ReactNode) => {
       const index = event.target.value;
-      dispatch(
-        updateYear(
-          years[typeof index === 'string' ? parseFloat(index) : index],
-        ),
+      navigate(
+        `/${years[typeof index === 'string' ? parseFloat(index) : index]}`,
       );
     },
-    [dispatch, years],
+    [years, navigate],
   );
 
   const onSelectOpen = useCallback(
@@ -84,15 +89,15 @@ const useSlider = () => {
 
       if (nextYearIndex === years.length) {
         if (firedByClick) {
-          dispatch(updateYear(years[0]));
+          navigate(`/${years[0]}`);
         } else {
           dispatch(updateIsAutoPlaying(false));
         }
       } else {
-        dispatch(updateYear(years[nextYearIndex]));
+        navigate(`/${years[nextYearIndex]}`);
       }
     },
-    [years, year, dispatch],
+    [years, year, dispatch, navigate],
   );
 
   const onPlayButtonClick: MouseEventHandler<HTMLButtonElement> =

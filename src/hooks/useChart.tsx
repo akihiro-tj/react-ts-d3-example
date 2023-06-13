@@ -9,6 +9,7 @@ import {
   useRef,
   useState,
 } from 'react';
+import { useParams } from 'react-router-dom';
 
 import { colors } from '../config';
 import { AppContext } from '../providers/app/AppContextProvider';
@@ -64,9 +65,14 @@ const useChart = () => {
   const ref = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState({ width: 0, height: 0 });
   const [hoveredCountry, setHoveredCountry] = useState<string>();
-  const { data, year, checkBoxGroup } = useContext(AppContext);
+  const { data, checkBoxGroup } = useContext(AppContext);
+  const params = useParams();
 
   const windowSize = useWindowSize();
+
+  const year = useMemo(() => {
+    return parseFloat(params.year || '');
+  }, [params]);
 
   const device = useMemo(() => {
     return windowSize.width < breakPoint ? 'mobile' : 'laptop';

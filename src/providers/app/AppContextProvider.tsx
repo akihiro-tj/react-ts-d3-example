@@ -1,4 +1,5 @@
 import { createContext, Dispatch, FC, ReactNode, useReducer } from 'react';
+import { HashRouter } from 'react-router-dom';
 
 import { Action } from '../../types';
 
@@ -19,7 +20,7 @@ const AppContextProvider: FC<AppContextProvider> = ({ children }) => {
   return (
     <AppContext.Provider value={state}>
       <AppUpdateContext.Provider value={dispatch}>
-        {children}
+        <HashRouter>{children}</HashRouter>
       </AppUpdateContext.Provider>
     </AppContext.Provider>
   );
