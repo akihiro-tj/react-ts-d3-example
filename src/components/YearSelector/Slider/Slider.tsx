@@ -18,7 +18,7 @@ export const Slider: FC<SliderProps> = ({ className }) => {
     <div
       className={clsx(
         className,
-        'flex items-center justify-between gap-3 py-4',
+        'flex items-center justify-between gap-3',
         style.slider,
       )}
     >
