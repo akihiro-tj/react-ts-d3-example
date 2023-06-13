@@ -14,8 +14,6 @@ const useYear = () => {
     return year;
   }, [params]);
 
-  console.log(year);
-
   return year;
 };
 
