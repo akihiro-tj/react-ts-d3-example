@@ -1,11 +1,11 @@
 {
-  "name": "vite-react-ts-boilerplate",
+  "name": "react-ts-d3-example",
   "private": true,
   "version": "0.4.0",
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://github.com/akihiro-tj/vite-react-ts-boilerplate.git"
+    "url": "https://github.com/akihiro-tj/react-ts-d3-example.git"
   },
   "scripts": {
     "dev": "vite",
