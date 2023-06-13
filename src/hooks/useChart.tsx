@@ -9,7 +9,6 @@ import {
   useRef,
   useState,
 } from 'react';
-import { useParams } from 'react-router-dom';
 
 import { colors } from '../config';
 import { AppContext } from '../providers/app/AppContextProvider';
@@ -17,6 +16,7 @@ import { calcArea, calcRadius } from '../utils/calc';
 
 import useResize from './useResize';
 import useWindowSize from './useWindowSize';
+import useYear from './useYear';
 
 const breakPoint = 600;
 
@@ -66,13 +66,9 @@ const useChart = () => {
   const [size, setSize] = useState({ width: 0, height: 0 });
   const [hoveredCountry, setHoveredCountry] = useState<string>();
   const { data, checkBoxGroup } = useContext(AppContext);
-  const params = useParams();
 
   const windowSize = useWindowSize();
-
-  const year = useMemo(() => {
-    return parseFloat(params.year || '');
-  }, [params]);
+  const year = useYear();
 
   const device = useMemo(() => {
     return windowSize.width < breakPoint ? 'mobile' : 'laptop';

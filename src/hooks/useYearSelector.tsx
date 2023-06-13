@@ -8,7 +8,7 @@ import {
   useEffect,
   useMemo,
 } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import {
   AppContext,
@@ -16,15 +16,14 @@ import {
 } from '../providers/app/AppContextProvider';
 import { updateIsAutoPlaying } from '../providers/app/appReducer';
 
+import useYear from './useYear';
+
 const useYearSelector = () => {
   const { data, isAutoPlaying } = useContext(AppContext);
   const dispatch = useContext(AppUpdateContext);
-  const params = useParams();
   const navigate = useNavigate();
 
-  const year = useMemo(() => {
-    return parseFloat(params.year || '');
-  }, [params]);
+  const year = useYear();
 
   const years = useMemo(() => {
     return Array.from(new Set(data.map(d => d.year)))
