@@ -7,29 +7,51 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useState,
 } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
-import {
-  AppContext,
-  AppUpdateContext,
-} from '../providers/app/AppContextProvider';
-import { updateIsAutoPlaying } from '../providers/app/appReducer';
-
-import useYear from './useYear';
+import { maxYear, minYear } from '../config';
+import { AppContext } from '../providers/app/AppContextProvider';
 
 const useYearSelector = () => {
-  const { data, isAutoPlaying } = useContext(AppContext);
-  const dispatch = useContext(AppUpdateContext);
+  const { data } = useContext(AppContext);
   const navigate = useNavigate();
+  const location = useLocation();
+  const params = useParams();
+  const [year, setYear] = useState(NaN);
 
-  const year = useYear();
+  const isAutoPlaying = useMemo(() => {
+    return location.pathname === '/play';
+  }, [location]);
+
+  const parsedYear = useMemo(() => {
+    const parsedYear = isAutoPlaying ? year : parseFloat(params.year || '');
+
+    if (isNaN(parsedYear) || parsedYear < minYear || maxYear < parsedYear) {
+      throw new Error();
+    }
+
+    return parsedYear;
+  }, [params, year, isAutoPlaying]);
 
   const years = useMemo(() => {
     return Array.from(new Set(data.map(d => d.year)))
       .slice()
       .sort((a, b) => a - b);
   }, [data]);
+
+  const nextYearIndex = useMemo(() => {
+    const currYearIndex = years.indexOf(parsedYear);
+
+    return currYearIndex + 1;
+  }, [years, parsedYear]);
+
+  useEffect(() => {
+    if (isAutoPlaying) return;
+
+    setYear(nextYearIndex === years.length ? years[0] : years[nextYearIndex]);
+  }, [years, nextYearIndex, isAutoPlaying]);
 
   const marks = useMemo(() => {
     return years.map((_, index) => ({
@@ -52,16 +74,15 @@ const useYearSelector = () => {
   }, [marks]);
 
   const value = useMemo(() => {
-    return years.indexOf(year);
-  }, [years, year]);
+    return years.indexOf(parsedYear);
+  }, [years, parsedYear]);
 
   const onSliderChange = useCallback(
     (event: Event, value: number | Array<number>, activeThumb: number) => {
       const index = typeof value === 'number' ? value : value[0];
-      dispatch(updateIsAutoPlaying(false));
       navigate(`/${years[index]}`);
     },
-    [dispatch, years, navigate],
+    [years, navigate],
   );
 
   const onSelectChange = useCallback(
@@ -76,34 +97,31 @@ const useYearSelector = () => {
 
   const onSelectOpen = useCallback(
     (event: SyntheticEvent<Element, Event>) => {
-      dispatch(updateIsAutoPlaying(false));
+      navigate(`/${parsedYear}`);
     },
-    [dispatch],
+    [navigate, parsedYear],
   );
 
   const play = useCallback(
     (firedByClick?: boolean) => {
-      const currYearIndex = years.indexOf(year);
-      const nextYearIndex = currYearIndex + 1;
-
       if (nextYearIndex === years.length) {
         if (firedByClick) {
-          navigate(`/${years[0]}`);
+          setYear(years[0]);
         } else {
-          dispatch(updateIsAutoPlaying(false));
+          navigate(`/${parsedYear}`);
         }
       } else {
-        navigate(`/${years[nextYearIndex]}`);
+        setYear(years[nextYearIndex]);
       }
     },
-    [years, year, dispatch, navigate],
+    [years, parsedYear, navigate, nextYearIndex],
   );
 
   const onPlayButtonClick: MouseEventHandler<HTMLButtonElement> =
     useCallback(() => {
       play(true);
-      dispatch(updateIsAutoPlaying(!isAutoPlaying));
-    }, [dispatch, isAutoPlaying, play]);
+      navigate(isAutoPlaying ? `/${parsedYear}` : '/play');
+    }, [isAutoPlaying, play, navigate, parsedYear]);
 
   useEffect(() => {
     const intervalID = window.setInterval(() => {
@@ -116,6 +134,7 @@ const useYearSelector = () => {
   }, [isAutoPlaying, play]);
 
   return {
+    year: parsedYear,
     sliderProps: {
       marks,
       value,

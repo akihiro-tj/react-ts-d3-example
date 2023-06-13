@@ -16,7 +16,7 @@ import { calcArea, calcRadius } from '../utils/calc';
 
 import useResize from './useResize';
 import useWindowSize from './useWindowSize';
-import useYear from './useYear';
+import useYearSelector from './useYearSelector';
 
 const breakPoint = 600;
 
@@ -68,7 +68,7 @@ const useChart = () => {
   const { data, checkBoxGroup } = useContext(AppContext);
 
   const windowSize = useWindowSize();
-  const year = useYear();
+  const { year } = useYearSelector();
 
   const device = useMemo(() => {
     return windowSize.width < breakPoint ? 'mobile' : 'laptop';
