@@ -12,7 +12,7 @@ import {
 
 import { colors } from '../constant';
 import { AppContext } from '../providers/app/AppContextProvider';
-import { calcArea, calcRadius } from '../util';
+import { calcArea, calcRadius } from '../utils/calc';
 
 import useResize from './useResize';
 import useWindowSize from './useWindowSize';
