@@ -17,11 +17,13 @@ export type Datum = {
   population: number;
 };
 
+export type Country = {
+  continent: Continent;
+  showLabel?: boolean;
+};
+
 export type Countries = {
-  [key: string]: {
-    continent: Continent;
-    showLabel?: boolean;
-  };
+  [key: string]: Country;
 };
 
 export type CheckBoxGroup = {
