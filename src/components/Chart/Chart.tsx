@@ -2,16 +2,18 @@ import clsx from 'clsx';
 import { FC } from 'react';
 
 import useChart from '../../hooks/useChart';
-import { AxisBottom } from '../AxisBottom';
-import { AxisLeft } from '../AxisLeft/AxisLeft';
-import { Card } from '../Card/Card';
-import { Container } from '../Container/Container';
-import { GridX } from '../GridX/GridX';
-import { GridY } from '../GridY/GridY';
-import { Label } from '../Label/Label';
-import { Legend } from '../Legend/Legend';
-import { Plot } from '../Plot/Plot';
-import { SVGChart } from '../SVGChart/SVGChart';
+import { Card } from '../Card';
+import { Container } from '../Container';
+import { Legend } from '../Legend';
+import {
+  AxisBottom,
+  AxisLeft,
+  GridX,
+  GridY,
+  Label,
+  Plot,
+  SVG,
+} from '../SVGChart';
 
 type ChartProps = {
   className?: string;
@@ -43,7 +45,7 @@ export const Chart: FC<ChartProps> = ({ className }) => {
           items={legendItems}
         />
         <Container ref={ref}>
-          <SVGChart {...size}>
+          <SVG {...size}>
             <GridX
               minX={margin.left}
               maxX={size.width - margin.right}
@@ -81,7 +83,7 @@ export const Chart: FC<ChartProps> = ({ className }) => {
               <Label key={label.id} {...label} />
             ))}
             <Label {...yearLabel} />
-          </SVGChart>
+          </SVG>
         </Container>
       </Card>
     </div>
