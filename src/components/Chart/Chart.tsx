@@ -64,7 +64,7 @@ export const Chart: FC<ChartProps> = ({ className }) => {
             y={size.height - margin.bottom}
             scale={scale.x}
             tickFormat={xTickFormat}
-            label="1人あたりGDP(対数スケール)"
+            label="1人あたりGDP (対数スケール)"
             labelX={size.width - margin.right}
           />
           {plots.map(plot => (
