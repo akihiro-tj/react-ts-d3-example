@@ -34,6 +34,7 @@
   - [TypeScript](#typescript)
   - [Prettier, ESLint, StyleLint](#prettier-eslint-stylelint)
 - [⭐ デプロイ](#-デプロイ)
+- [🖊️ その他](#️-その他)
 
 ## 📊 アプリケーションの概要
 
@@ -121,7 +122,7 @@ export type AppState = {
 
 ## 🧮 ビューとロジック
 
-ロジックをカスタムフックへと分離し、コンポーネントの責務をビューの描画に絞っています。
+ロジックをカスタムフックへと分離し、コンポーネントはビューの描画のみを責務として負います。
 
 [Chart.tsx](./src/components/Chart/Chart.tsx)
 
@@ -237,9 +238,9 @@ D3.js には主に
 - 座標計算
 - DOM 操作
 
-の 2 つの機能がありますが、DOM 操作については React と役割が被ります。
+の 2 つの機能がありますが、DOM 操作については React と役割が被っています。
 
-したがって React と D3.js を組み合わせるために、座標計算を D3.js、DOM 操作を React に担わせています。
+よって React と D3.js を組み合わせるために、座標計算を D3.js、DOM 操作を React に担わせています。
 
 ### 座標計算 (D3.js)
 
@@ -380,3 +381,7 @@ $ git push origin v0.1.0
 ```
 
 [.github/workflows/deploy.yml](./.github/workflows/deploy.yml)
+
+## 🖊️ その他
+
+より詳細な内容は[データ可視化のための Web フロントエンド開発 (入門編)](https://www.akihiro-tj.com/content/frontend-for-data-viz--basic)を参照してください（順次投稿予定）。
