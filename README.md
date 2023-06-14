@@ -1,6 +1,6 @@
-# React x TypeScript x D3.js デモ <!-- omit in toc -->
+# React x TypeScript x D3.js 実装例 <!-- omit in toc -->
 
-[React](https://ja.legacy.reactjs.org/), [TypeScript](https://www.typescriptlang.org/), [D3.js](https://d3js.org/) を使ったデータ可視化のデモです。
+[React](https://ja.legacy.reactjs.org/), [TypeScript](https://www.typescriptlang.org/), [D3.js](https://d3js.org/) を用いたデータビジュアライゼーションの実装例です。
 
 1 人あたり GDP と平均寿命の関係を散布図に示しました。円の大きさは人口を表します。
 
