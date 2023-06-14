@@ -9,7 +9,7 @@
 - [デモ](https://akihiro-tj.github.io/react-ts-d3-example/)
 - [Storybook](https://react-ts-d3-example-storybook.netlify.app/)
 
-![](https://github.com/akihiro-tj/react-ts-d3-example/assets/50857720/0df473cc-d612-4209-bcae-1dc7f5b787de)
+![デモ画面](https://github.com/akihiro-tj/react-ts-d3-example/assets/50857720/0df473cc-d612-4209-bcae-1dc7f5b787de)
 
 ## 目次 <!-- omit in toc -->
 
